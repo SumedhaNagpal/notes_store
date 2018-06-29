@@ -25,6 +25,7 @@ public class LoginController extends HttpServlet {
 		
 		if(userdao.authenticate(email, password)) {
 			HttpSession session = request.getSession();
+			//session.setAttribute("user_id", userdao.getUserId());
 			session.setAttribute("email", email);
 			response.sendRedirect("success.jsp");
 		}

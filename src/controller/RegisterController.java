@@ -26,13 +26,13 @@ public class RegisterController extends HttpServlet {
 		String email = request.getParameter("email");
 		String branch = request.getParameter("branch");
 		int current_year = Integer.parseInt(request.getParameter("current_year"));
-		String pw = request.getParameter("pw");
+		String password_hash = request.getParameter("password_hash");
 		
 		if(userdao.checkUser(email)) {		//true if already registered
 			response.sendRedirect("index.jsp");
 		}
 		else {
-			if(userdao.registerUser(first_name, last_name, email, branch, current_year, pw))
+			if(userdao.registerUser(first_name, last_name, email, branch, current_year, password_hash))
 				response.sendRedirect("welcome.jsp");
 			else
 				response.sendRedirect("registerpage.jsp");

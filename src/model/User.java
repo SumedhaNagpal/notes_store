@@ -1,12 +1,21 @@
 package model;
 
 public class User {
+	private int user_id;
 	private String first_name;
 	private String last_name;
 	private String email;
 	private String branch;
 	private int current_year;
-	private String pw;
+	private String password_hash;
+	
+	
+	public int getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
 	public String getFirst_name() {
 		return first_name;
 	}
@@ -37,18 +46,18 @@ public class User {
 	public void setCurrent_year(int current_year) {
 		this.current_year = current_year;
 	}
-	public String getPw() {
-		return pw;
+	public String getPassword_hash() {
+		return password_hash;
 	}
-	public void setPw(String pw) {
-		this.pw = pw;
+	public void setPassword_hash(String password_hash) {
+		this.password_hash = password_hash;
 	}
-	
 	@Override
 	public String toString() {
-		return "User [first_name=" + first_name + ", last_name=" + last_name + ", email=" + email + ", branch=" + branch
-				+ ", current_year=" + current_year + ", pw=" + pw + "]";
+		return "User [user_id=" + user_id + ", first_name=" + first_name + ", last_name=" + last_name + ", email="
+				+ email + ", branch=" + branch + ", current_year=" + current_year + ", password_hash=" + password_hash + "]";
 	}
+
 	
 	
 }

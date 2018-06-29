@@ -52,7 +52,7 @@
                     </tr>
                     <tr>
                         <td>Password</td>
-                        <td><input type="password" name="pw" value="" /></td>
+                        <td><input type="password" name="password_hash" value="" /></td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Submit" /></td>

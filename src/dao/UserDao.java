@@ -23,7 +23,7 @@ public class UserDao {
 	
 	public boolean authenticate(String email, String password) {				
 		try {				
-			String query = "SELECT * FROM user WHERE email=? AND pw=?";
+			String query = "SELECT * FROM user WHERE email=? AND password_hash=?";
 			PreparedStatement pst = connection.prepareStatement(query);
 			pst.setString(1, email);
 			pst.setString(2, password);
@@ -58,8 +58,8 @@ public class UserDao {
 	}
 	
 	
-	public boolean registerUser(String first_name, String last_name, String email, String branch, int current_year, String pw) {
-		String query = "INSERT INTO user VALUES(?,?,?,?,?,?)";
+	public boolean registerUser(String first_name, String last_name, String email, String branch, int current_year, String password_hash) {
+		String query = "INSERT INTO user(first_name, last_name, email, branch, current_year, password_hash) VALUES(?,?,?,?,?,?)";
 		PreparedStatement pst;
 		try {
 			pst = connection.prepareStatement(query);
@@ -68,7 +68,7 @@ public class UserDao {
 			pst.setString(3, email);
 			pst.setString(4, branch);
 			pst.setInt(5, current_year);
-			pst.setString(6, pw);
+			pst.setString(6, password_hash);
 			
 			int num = pst.executeUpdate();
 			if(num>0)
@@ -81,4 +81,5 @@ public class UserDao {
 		
 		return false;
 	}
+		
 }

@@ -21,5 +21,7 @@
 		<a href='logout'>Log out</a>
 		
 	<%  }  %>
+	
+	<a href='sell.jsp'> Add product to sell</a>
 </body>
 </html>
