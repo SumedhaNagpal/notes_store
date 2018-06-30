@@ -6,7 +6,7 @@ public class Product {
 	private String title;
 	private String description;
 	private int price;
-	private String condition;
+	private String product_condition;
 	public int getProduct_id() {
 		return product_id;
 	}
@@ -37,16 +37,16 @@ public class Product {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getCondition() {
-		return condition;
+	public String getProduct_condition() {
+		return product_condition;
 	}
-	public void setCondition(String condition) {
-		this.condition = condition;
+	public void setProduct_condition(String product_condition) {
+		this.product_condition = product_condition;
 	}
 	@Override
 	public String toString() {
 		return "Product [product_id=" + product_id + ", user_id=" + user_id + ", title=" + title + ", description="
-				+ description + ", price=" + price + ", condition=" + condition + "]";
+				+ description + ", price=" + price + ", condition=" + product_condition + "]";
 	}
 	
 	

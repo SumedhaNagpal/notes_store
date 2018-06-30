@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import model.User;
+
 import dao.UserDao;
 
 
@@ -24,8 +26,10 @@ public class LoginController extends HttpServlet {
 		UserDao userdao = new UserDao();
 		
 		if(userdao.authenticate(email, password)) {
+			User user = userdao.getInfo(email);
 			HttpSession session = request.getSession();
-			//session.setAttribute("user_id", userdao.getUserId());
+			session.setAttribute("user_id", user.getUser_id());
+			session.setAttribute("first_name", user.getFirst_name());			
 			session.setAttribute("email", email);
 			response.sendRedirect("success.jsp");
 		}

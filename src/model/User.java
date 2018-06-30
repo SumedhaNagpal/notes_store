@@ -9,7 +9,6 @@ public class User {
 	private int current_year;
 	private String password_hash;
 	
-	
 	public int getUser_id() {
 		return user_id;
 	}

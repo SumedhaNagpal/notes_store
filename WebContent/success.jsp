@@ -13,15 +13,15 @@
     	if ((session.getAttribute("email") == null) || (session.getAttribute("email") == "")) {
 	%>
 		You are not logged in<br/>
-		<a href="index.jsp">Please Login</a>
+		<a href="login.jsp">Please Login</a>
 	
 	<% 	} else {	%>
 	
-		Welcome <%=session.getAttribute("email")%>
+		Welcome <%=session.getAttribute("first_name")%>, <%= session.getAttribute("user_id") %>
 		<a href='logout'>Log out</a>
-		
+		<a href='sell.jsp'> Add product to sell</a>	
 	<%  }  %>
 	
-	<a href='sell.jsp'> Add product to sell</a>
+	
 </body>
 </html>

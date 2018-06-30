@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import model.User;
 import util.DBUtil;
 
 public class UserDao {
@@ -40,6 +41,29 @@ public class UserDao {
 		return false;
 	}
 	
+	public User getInfo(String email) {		
+		String query = "SELECT user_id, first_name, last_name, branch, current_year, password_hash FROM user WHERE email = ?";		
+		try {
+			PreparedStatement pst = connection.prepareStatement(query);			
+			pst.setString(1, email);
+			ResultSet rs = pst.executeQuery();			
+			if(rs.next()) {
+				User user = new User();
+				user.setUser_id(rs.getInt("user_id"));
+				user.setFirst_name(rs.getString("first_name"));
+				user.setLast_name(rs.getString("last_name"));
+				user.setEmail(email);
+				user.setBranch(rs.getString("branch"));
+				user.setCurrent_year(rs.getInt("current_year"));
+				user.setPassword_hash(rs.getString("password_hash"));
+				return user;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
+		return null;		
+	}
 	
 	//returns true if email already registered
 	public boolean checkUser(String email) {				

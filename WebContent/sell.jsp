@@ -7,6 +7,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+	<%
+		HttpServletResponse httpResponse = (HttpServletResponse) response;
+		httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
+    	if ((session.getAttribute("email") == null) || (session.getAttribute("email") == "")) {
+	%>
+		You are not logged in<br/>
+		<a href="index.jsp">Please Login</a>
+	
+	<% } 
+    	
+    	else
+    		
+    	{ %>
+	
 	<form method="post" action="addProduct">
             <center>
             <table border="1" width="30%" cellpadding="5" bgcolor="pink">
@@ -33,7 +48,7 @@
                                         
                     <tr>
                         <td>Condition</td>
-                        <td><input type="text" name="condition" value="" /></td>
+                        <td><input type="text" name="product_]condition" value="" /></td>
                     </tr>
                     
                     <tr>
@@ -45,5 +60,7 @@
             </table>
             </center>
         </form>
+        
+        <% } %>
 </body>
 </html>
