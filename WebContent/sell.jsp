@@ -48,7 +48,7 @@
                                         
                     <tr>
                         <td>Condition</td>
-                        <td><input type="text" name="product_]condition" value="" /></td>
+                        <td><input type="text" name="product_condition" value="" /></td>
                     </tr>
                     
                     <tr>
