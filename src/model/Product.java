@@ -7,6 +7,12 @@ public class Product {
 	private String description;
 	private int price;
 	private String product_condition;
+	
+	public Product(String title, String description, int price){
+		this.title = title;
+		this.description = description;
+		this.price = price;
+	}
 	public int getProduct_id() {
 		return product_id;
 	}

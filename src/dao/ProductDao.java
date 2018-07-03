@@ -2,8 +2,12 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
+import model.Product;
 import util.DBUtil;
 
 public class ProductDao {
@@ -41,5 +45,25 @@ public class ProductDao {
 		
 		
 		return false;
+	}
+	
+	public ArrayList<Product> showProducts(int user_id) {
+		ArrayList<Product> productList = new ArrayList<Product>();
+		String showProduct = "SELECT * FROM product WHERE user_id <> " + user_id;
+		PreparedStatement pst;
+		try {
+			pst = connection.prepareStatement(showProduct);
+			ResultSet result = pst.executeQuery(showProduct);
+			while(result.next()) {
+				String title = result.getString("title");
+				String description = result.getString("description");
+				int price = result.getInt("price");
+				Product prod = new Product(title, description, price);
+				productList.add(prod);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return productList;
 	}
 }

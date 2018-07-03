@@ -52,9 +52,15 @@
                     </tr>
                     
                     <tr>
+                        <td>Upload image</td>
+                        <td><input type="file" name="pic" accept="image/*"></td>
+                    </tr>
+                    
+                    <tr>
                     	<td><input type="reset" value="Reset" /></td>
                         <td><input type="submit" value="Submit" /></td>                        
                     </tr>
+                   
 
                 </tbody>
             </table>
