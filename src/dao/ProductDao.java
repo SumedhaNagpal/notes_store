@@ -49,7 +49,7 @@ public class ProductDao {
 	
 	public ArrayList<Product> showProducts(int user_id) {
 		ArrayList<Product> productList = new ArrayList<Product>();
-		String showProduct = "SELECT * FROM product WHERE user_id <> " + user_id;
+		String showProduct = "SELECT * FROM product INNER JOIN user ON product.user_id = user.user_id WHERE product.user_id <> " + user_id;
 		PreparedStatement pst;
 		try {
 			pst = connection.prepareStatement(showProduct);
@@ -58,7 +58,12 @@ public class ProductDao {
 				String title = result.getString("title");
 				String description = result.getString("description");
 				int price = result.getInt("price");
-				Product prod = new Product(title, description, price);
+				int product_id = result.getInt("product_id");
+				String condition = result.getString("product_condition");
+				String first_name = result.getString("first_name");
+				String last_name = result.getString("last_name");
+				String user_name = first_name + " " + last_name;
+				Product prod = new Product(product_id,title, description, price, condition, user_name);
 				productList.add(prod);
 			}
 		} catch(Exception e) {

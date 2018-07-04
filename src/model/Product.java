@@ -7,11 +7,15 @@ public class Product {
 	private String description;
 	private int price;
 	private String product_condition;
+	private String user_name;
 	
-	public Product(String title, String description, int price){
+	public Product(int product_id,String title, String description, int price, String condition, String user_name){
+		this.product_id = product_id;
 		this.title = title;
 		this.description = description;
 		this.price = price;
+		this.product_condition = condition;
+		this.user_name = user_name;
 	}
 	public int getProduct_id() {
 		return product_id;
@@ -28,11 +32,17 @@ public class Product {
 	public String getTitle() {
 		return title;
 	}
+	public String getUser_name() {
+		return user_name;
+	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
 	public String getDescription() {
 		return description;
+	}
+	public String getProductCondition() {
+		return product_condition;
 	}
 	public void setDescription(String description) {
 		this.description = description;
