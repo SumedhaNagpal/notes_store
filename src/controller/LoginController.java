@@ -38,9 +38,10 @@ public class LoginController extends HttpServlet {
 			ProductDao productdao = new ProductDao();
 			ArrayList<Product> productList = new ArrayList<Product>();
 			productList = productdao.showProducts(user.getUser_id());
-			request.setAttribute("product list", productList);
-			request.getRequestDispatcher("success.jsp").forward(request, response);
-			//response.sendRedirect("success.jsp");
+			session.setAttribute("product list", productList);
+//			request.setAttribute("product list", productList);
+//			request.getRequestDispatcher("success.jsp").forward(request, response);
+			response.sendRedirect("success.jsp");
 		
 		}
 		
