@@ -78,7 +78,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			  <div class="w3-row-padding">
 			    <%
 			    	ArrayList<Product> productList = new ArrayList<Product>();
-			    	productList = (ArrayList)request.getAttribute("product list");
+			    	productList = (ArrayList)session.getAttribute("product list");
 			    	for(int i = 0; i < productList.size() && i < 3; i++){
 			    		Product product = productList.get(i);
 		   		 %>
