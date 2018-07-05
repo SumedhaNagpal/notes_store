@@ -14,6 +14,10 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+#product-details h4 {text-decoration: underline; font-weight: bold;}
+</style>
 </head>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
 <%
@@ -49,7 +53,7 @@
 		  <%
 			  	int pageNo = (int) session.getAttribute("page number");
 			  	int perPageCount = 6;
-			  %>
+			  %>			  
 		
 		<!--Photo Grid-->
 		  <div class="w3-row-padding" style="text-align: center">
@@ -133,12 +137,15 @@
 			      	<a href="myProducts?page=<%= i %>" class="w3-bar-item w3-button <%=paginationStyle%>"><%= i %></a>
 			      <% } 
 			      	
-			      	if(pageNo != totalPages){
+			      	if(pageNo != totalPages && totalProducts != 0){
 			      %>
 					<a href="myProducts?page=<%= (pageNo + 1) %>" class="w3-bar-item w3-button w3-hover-black">»</a>
-			   	  <% } %>
+			   	  <% } %>			   	  
 			    </div>
 			  </div>
+			  <%if(totalProducts == 0){ %>
+			 	<h3 style="margin-left:30px">You haven't sold any book yet. Sell your old books and notes and help someone! :)</h3>
+			  <% } %>
 		  </div>
 		  
 		  <script>

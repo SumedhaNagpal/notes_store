@@ -5,8 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
+#product-details h4 {text-decoration: underline; font-weight: bold;}
+</style>
 </head>
-<body>
+<body class="w3-light-grey w3-content" style="max-width:1600px">
 
 	<%
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -21,10 +31,22 @@
     	else
     		
     	{ %>
+    	<jsp:include page="sidebar.jsp" />
+    	
+    	<div class="w3-main" style="margin-left:300px">
+    	
+    	<header id="portfolio">
+			    <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+			    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
+			    <div class="w3-container">
+			    <h1><b>Sell Notes and Books</b></h1>
+			    <div class="w3-section w3-bottombar w3-padding-16">
+			    </div>
+	    </header>
 	
-	<form method="post" action="addProduct">
+	<form method="post" action="addProduct" style="margin-left:20px">
             <center>
-            <table border="1" width="30%" cellpadding="5" bgcolor="pink">
+            <table class="table table-responsive" border="1" width="30%" cellpadding="5" bgcolor="pink">
                 <thead>
                     <tr>
                         <th colspan="2">Add a product to sell</th>
@@ -33,22 +55,22 @@
                 <tbody>
                     <tr>
                         <td>Title</td>
-                        <td><input type="text" name="title" value="" /></td>
+                        <td><input class="form-control" type="text" name="title" value="" /></td>
                     </tr>
                     
                     <tr>
                         <td>Description</td>
-                        <td><input type="text" name="description" value="" /></td>
+                        <td><input class="form-control" type="text" name="description" value="" /></td>
                     </tr>
                     
                     <tr>
                         <td>Price</td>
-                        <td><input type="number" name="price" value="" /></td>
+                        <td><input class="form-control" type="number" name="price" value="" /></td>
                     </tr>
                                         
                     <tr>
                         <td>Condition</td>
-                        <td><input type="text" name="product_condition" value="" /></td>
+                        <td><input class="form-control" type="text" name="product_condition" value="" /></td>
                     </tr>
                     
                     <tr>
@@ -57,8 +79,8 @@
                     </tr>
                     
                     <tr>
-                    	<td><input type="reset" value="Reset" /></td>
-                        <td><input type="submit" value="Submit" /></td>                        
+                    	<td style="text-align:center"><input class="btn btn-info" type="reset" value="Reset" /></td>
+                        <td style="text-align:center"><input class="btn btn-info" type="submit" value="Submit" /></td>                        
                     </tr>
                    
 
@@ -66,6 +88,7 @@
             </table>
             </center>
         </form>
+        </div>
         
         <% } %>
 </body>
