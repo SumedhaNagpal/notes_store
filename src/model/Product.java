@@ -17,6 +17,14 @@ public class Product {
 		this.product_condition = condition;
 		this.user_name = user_name;
 	}
+	
+	public Product(int product_id,String title, String description, int price, String condition){
+		this.product_id = product_id;
+		this.title = title;
+		this.description = description;
+		this.price = price;
+		this.product_condition = condition;
+	}
 	public int getProduct_id() {
 		return product_id;
 	}
