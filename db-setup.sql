@@ -25,6 +25,8 @@ CREATE TABLE `product` (
   `description` varchar(255) DEFAULT NULL,
   `price` int(11) NOT NULL,
   `product_condition` varchar(64) DEFAULT NULL,
+  `product_semester` tinyint DEFAULT NULL,
+  `product_type` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`product_id`), 
   FOREIGN KEY (`user_id`) REFERENCES user(user_id)
 );

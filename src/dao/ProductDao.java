@@ -23,8 +23,9 @@ public class ProductDao {
 		}
     }
 	
-	public boolean addProduct(int user_id, String title, String description, int price, String product_condition) {
-		String query = "INSERT INTO product(user_id, title, description, price, product_condition) VALUES(?,?,?,?,?)";
+	public boolean addProduct(int user_id, String title, String description, int price, String product_condition, int product_semester, String product_type) {
+		String query = "INSERT INTO product(user_id, title, description, price, product_condition, product_semester, product_type) "
+				+ "VALUES(?,?,?,?,?,?,?)";
 		PreparedStatement pst;
 		try {
 			pst = connection.prepareStatement(query);
@@ -33,6 +34,8 @@ public class ProductDao {
 			pst.setString(3, description);
 			pst.setInt(4, price);
 			pst.setString(5, product_condition);
+			pst.setInt(6, product_semester);
+			pst.setString(7, product_type);
 			
 			int num = pst.executeUpdate();
 			if(num>0) {
@@ -59,11 +62,13 @@ public class ProductDao {
 				String description = result.getString("description");
 				int price = result.getInt("price");
 				int product_id = result.getInt("product_id");
-				String condition = result.getString("product_condition");
+				String product_condition = result.getString("product_condition");
+				int product_semester = result.getInt("product_semester");		
+				String product_type= result.getString("product_type");
 				String first_name = result.getString("first_name");
 				String last_name = result.getString("last_name");
 				String user_name = first_name + " " + last_name;
-				Product prod = new Product(product_id,title, description, price, condition, user_name);
+				Product prod = new Product(product_id,title, description, price, product_condition, user_name, product_semester, product_type);
 				productList.add(prod);
 			}
 		} catch(Exception e) {

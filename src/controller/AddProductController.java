@@ -27,10 +27,13 @@ public class AddProductController extends HttpServlet {
 		String description = request.getParameter("description");
 		int price = Integer.parseInt(request.getParameter("price"));
 		String product_condition = request.getParameter("product_condition");
+		int product_semester = Integer.parseInt(request.getParameter("product_semester"));
+		String product_type= request.getParameter("product_type");
+		
 		int user_id = (Integer)session.getAttribute("user_id");
 		
 		
-		if(productdao.addProduct(user_id, title, description, price, product_condition)) {			
+		if(productdao.addProduct(user_id, title, description, price, product_condition, product_semester, product_type)) {			
 			PrintWriter out = response.getWriter();
 			out.print("Add product works");
 			response.sendRedirect("products.jsp");

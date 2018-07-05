@@ -8,14 +8,30 @@ public class Product {
 	private int price;
 	private String product_condition;
 	private String user_name;
+	private int product_semester;
+	private String product_type;
 	
-	public Product(int product_id,String title, String description, int price, String condition, String user_name){
+	public Product(int product_id,String title, String description, int price, String product_condition, String user_name, int product_semester, String product_type){
 		this.product_id = product_id;
 		this.title = title;
 		this.description = description;
 		this.price = price;
-		this.product_condition = condition;
+		this.product_condition = product_condition;
 		this.user_name = user_name;
+		this.product_semester = product_semester;
+		this.product_type = product_type;
+	}
+	public int getProduct_semester() {
+		return product_semester;
+	}
+	public void setProduct_semester(int product_semester) {
+		this.product_semester = product_semester;
+	}
+	public String getProduct_type() {
+		return product_type;
+	}
+	public void setProduct_type(String product_type) {
+		this.product_type = product_type;
 	}
 	public int getProduct_id() {
 		return product_id;
@@ -62,8 +78,7 @@ public class Product {
 	@Override
 	public String toString() {
 		return "Product [product_id=" + product_id + ", user_id=" + user_id + ", title=" + title + ", description="
-				+ description + ", price=" + price + ", condition=" + product_condition + "]";
-	}
-	
-	
+				+ description + ", price=" + price + ", product_condition=" + product_condition + ", user_name="
+				+ user_name + ", product_semester=" + product_semester + ", product_type=" + product_type + "]";
+	}	
 }

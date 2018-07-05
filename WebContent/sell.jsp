@@ -52,6 +52,22 @@
                     </tr>
                     
                     <tr>
+                        <td>Semester</td>
+                        <td><input type="number" name = "product_semester" /></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Type</td>
+                        <td>
+                        	<select name="product_type">
+								<option>Book</option>
+								<option>Notes</option>
+								<option>Other</option>								
+							</select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
                         <td>Upload image</td>
                         <td><input type="file" name="pic" accept="image/*"></td>
                     </tr>
