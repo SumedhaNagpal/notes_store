@@ -78,12 +78,28 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			    </div>
 			  </header>
 			  
+			  <%
+			  	String spageNo=request.getParameter("page");
+			  	int pageNo;
+			  	if(spageNo != null){
+			  		pageNo =Integer.parseInt(spageNo); 
+			  	}
+			  	else{
+			  		pageNo = 1;
+			  	}
+			  	int perPageCount = 6;
+			  	int itemNo = 1;
+			  	if(pageNo != 1){
+			  		itemNo = (pageNo - 1) * perPageCount + 1;
+			  	}
+			  %>
+			  
 			  <!-- First Photo Grid-->
 			  <div class="w3-row-padding" style="text-align: center">
 			    <%
 			    	ArrayList<Product> productList = new ArrayList<Product>();
 			    	productList = (ArrayList)session.getAttribute("product list");
-			    	for(int i = 0; i < productList.size() && i < 3; i++){
+			    	for(int i = itemNo - 1; i < productList.size() && i < itemNo + 6 - 1; i++){
 			    		Product product = productList.get(i);
 		   		 %>
 			    <div class="w3-third w3-container w3-margin-bottom">
@@ -133,12 +149,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			    <% } %>
 			  </div>
 			  
-			  <!-- Second Photo Grid-->
+			  <%-- <!-- Second Photo Grid-->
+			  <div class="w3-row-padding">
 			  <%
-			    	for(int i = 2; i < productList.size() && i < 6; i++){
+			    	for(int i = itemNo + 3; i < productList.size() && i < itemNo + perPageCount; i++){
 			    		Product product = productList.get(i);
 		   	   %>
-			  <div class="w3-row-padding">
 			    <div class="w3-third w3-container w3-margin-bottom">
 			      <img src="http://via.placeholder.com/350x150" alt="Norway" style="width:100%" class="w3-hover-opacity">
 			      <div class="w3-container w3-white">
@@ -147,19 +163,38 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			        <p><b> ₹ <%= product.getPrice() %></b></p>
 			      </div>
 			    </div>
-			  </div>
-			  <% } %> 
+			    <% } %> 
+			  </div> --%>
+			  
 			  
 			
 			  <!-- Pagination -->
 			  <div class="w3-center w3-padding-32">
 			    <div class="w3-bar">
-			      <a href="#" class="w3-bar-item w3-button w3-hover-black">«</a>
-			      <a href="#" class="w3-bar-item w3-black w3-button">1</a>
-			      <a href="#" class="w3-bar-item w3-button w3-hover-black">2</a>
-			      <a href="#" class="w3-bar-item w3-button w3-hover-black">3</a>
-			      <a href="#" class="w3-bar-item w3-button w3-hover-black">4</a>
-			      <a href="#" class="w3-bar-item w3-button w3-hover-black">»</a>
+			    <%
+			    	if(pageNo != 1){
+			    %>
+			     		 <a href="success.jsp?page=<%= (pageNo - 1) %>" class="w3-bar-item w3-button w3-hover-black">«</a>
+			      <%
+			    	}
+			      	int totalProducts = productList.size();
+			      	int totalPages = (int)Math.ceil((double)totalProducts/perPageCount);
+			      	for(int i = 1; i <= totalPages; i++){
+			      		String paginationStyle = "";
+			      		if(i == pageNo){
+			      			paginationStyle = "w3-black";
+			      		}
+			      		else{
+			      			paginationStyle = "w3-hover-black";
+			      		}
+			      %>
+			      	<a href="success.jsp?page=<%= i %>" class="w3-bar-item w3-button <%=paginationStyle%>"><%= i %></a>
+			      <% } 
+			      	
+			      	if(pageNo != totalPages){
+			      %>
+					<a href="success.jsp?page=<%=pageNo+1%>" class="w3-bar-item w3-button w3-hover-black">»</a>
+			   	  <% } %>
 			    </div>
 			  </div>
 			
