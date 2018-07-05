@@ -41,7 +41,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("product list", productList);
 //			request.setAttribute("product list", productList);
 //			request.getRequestDispatcher("success.jsp").forward(request, response);
-			response.sendRedirect("success.jsp");
+			response.sendRedirect("success.jsp?page=1");
 		
 		}
 		
