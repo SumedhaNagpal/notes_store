@@ -33,6 +33,14 @@ public class Product {
 	public void setProduct_type(String product_type) {
 		this.product_type = product_type;
 	}
+	
+	public Product(int product_id,String title, String description, int price, String condition){
+		this.product_id = product_id;
+		this.title = title;
+		this.description = description;
+		this.price = price;
+		this.product_condition = condition;
+	}
 	public int getProduct_id() {
 		return product_id;
 	}

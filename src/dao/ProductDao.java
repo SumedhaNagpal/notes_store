@@ -50,7 +50,7 @@ public class ProductDao {
 		return false;
 	}
 	
-	public ArrayList<Product> showProducts(int user_id) {
+	public ArrayList<Product> showAllProducts(int user_id) {
 		ArrayList<Product> productList = new ArrayList<Product>();
 		String showProduct = "SELECT * FROM product INNER JOIN user ON product.user_id = user.user_id WHERE product.user_id <> " + user_id;
 		PreparedStatement pst;
@@ -76,4 +76,46 @@ public class ProductDao {
 		}
 		return productList;
 	}
+	
+	public ArrayList<Product> showMyProducts(int user_id, int index) {
+		
+		ArrayList<Product> productList = new ArrayList<Product>();
+		String getMyProducts = "SELECT * FROM product WHERE product.user_id = " + user_id + " LIMIT " + (index - 1) + ", 6";
+		System.out.println(getMyProducts);
+		PreparedStatement pst;
+		try {
+			pst = connection.prepareStatement(getMyProducts);
+			ResultSet result = pst.executeQuery(getMyProducts);
+			while(result.next()) {
+				String title = result.getString("title");
+				String description = result.getString("description");
+				int price = result.getInt("price");
+				int product_id = result.getInt("product_id");
+				String condition = result.getString("product_condition");
+				Product prod = new Product(product_id,title, description, price, condition);
+				productList.add(prod);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return productList;
+	}
+	
+public int getMyProductCount(int user_id) {
+		
+		String totalCountOfMyProducts = "SELECT COUNT(product_id) FROM product WHERE product.user_id = " + user_id;
+		PreparedStatement pst;
+		int count = 0;
+		try {
+			pst = connection.prepareStatement(totalCountOfMyProducts);
+			ResultSet result = pst.executeQuery(totalCountOfMyProducts);
+			while(result.next()) {
+				count = result.getInt(1);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
 }
