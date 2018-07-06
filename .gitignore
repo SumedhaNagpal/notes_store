@@ -2,6 +2,7 @@
 # Eclipse
 ######################
  
+src/util/DBUtil.java
 WebContent/WEB-INF/lib/
 *.class
 *.pydevproject
