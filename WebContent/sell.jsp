@@ -75,7 +75,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                     
                     <tr>
                         <td>Semester</td>
-                        <td><input type="number" name = "product_semester" /></td>
+                        <td>
+                        	<select name="product_semester">
+								<option>1</option>
+								<option>2</option>
+								<option>3</option>	
+								<option>4</option>	
+								<option>5</option>	
+								<option>6</option>	
+								<option>7</option>	
+								<option>8</option>								
+							</select>
+                        </td>
                     </tr>
                     
                     <tr>
