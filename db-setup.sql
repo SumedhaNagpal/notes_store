@@ -2,7 +2,7 @@ CREATE DATABASE IF NOT EXISTS NotesStore;
 
 USE NotesStore;
 
-
+DROP TABLE IF EXISTS product;
 DROP TABLE IF EXISTS user;
 
 CREATE TABLE `user` (
