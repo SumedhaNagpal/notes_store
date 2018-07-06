@@ -70,7 +70,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 		        <p><b> ₹ <%= product.getPrice() %></b></p>
 		        <div style="margin-bottom: 24px">
 		        <button type="button class" class="btn btn-info " data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>">View Details</button>
-		        <button type="button class" class="btn btn-warning" data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>">Edit</button>
+		        <button type="button class" class="btn btn-warning" data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>_edit">Edit</button>
 		        <button type="button class" class="btn btn-danger " data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>">Delete</button>
 		        </div>
 			
@@ -108,6 +108,97 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 				
 				  </div>
 				</div>
+
+
+
+
+				<!--Modal-edit product-->
+				
+				<div id="product_<%= product.getProduct_id()%>_edit" class="modal fade" role="dialog">
+				  <div class="modal-dialog">
+
+
+				    <div class="modal-content">
+				    	<div class="modal-header">
+				        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+				        	<h4 class="modal-title"><b><%= product.getTitle() %></b></h4>
+				      	</div>
+    					<form method="post" action="addProduct" style="margin-left:20px">
+            			  <!-- <div class = "modal-body">	
+            				<center>            			
+								Edit details of product
+                    			<br><span> Title </span>	<input class="form-control" type="text" name="title" value="" />
+                    
+                    
+                    			<br><h4>Description </h4>
+                    			<p><input class="form-control" type="text" name="description" value="" /><p>
+                    
+		        	            <br><span>Price </span>
+        		    	        <input class="form-control" type="number" name="price" value="" />
+                    
+                   				<br><div>Condition 
+        		    	        <input class="form-control" type="text" name="product_condition" value="" />
+        		    	        </div>
+
+				                <br><div>
+				                	Semester 
+		                           	<select name="product_semester">
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>	
+										<option>4</option>	
+										<option>5</option>	
+										<option>6</option>	
+										<option>7</option>	
+										<option>8</option>								
+									</select>
+									</div>           
+
+								<br><span>Type </span>
+		                           	<select name="product_type">
+										<option>Book</option>
+										<option>Notes</option>
+										<option>Other</option>								
+									</select>                         
+                        		<br><input class="btn btn-info" type="submit" value="Submit" />                  
+				            </center> 
+				          </div> -->
+				          
+
+				            <div class="modal-body">	                
+				                <form action="form.php" method="POST">
+                				  <div class="form-group">
+				                    <label for="name">Name</label>
+                				    <input type="text" class="form-control" id="name" placeholder="Enter Name"/>
+				                  </div>
+                				  <div class="form-group">
+				                    <label for="email">Email</label>
+                				    <input type="text" class="form-control" id="email" placeholder="Email Address"/>
+				                  </div>
+                    			  <div class="form-group">
+				                    <label for="name">Phone No.</label>
+                				    <input type="text" class="form-control" id="phone" placeholder="Enter Phone No."/>
+                  				  </div>
+                                  <div class="form-group">
+               					     <label for="name">message</label>
+                      				 <input type="textarea" class="form-control" id="message" placeholder="Enter message"/>
+				                  </div>
+                    
+                				  <button type="submit" class="btn btn-primary">Submit</button>
+                				</form>
+                			</div> 
+
+
+        				</form>
+		            </div>
+
+
+
+				  </div>
+				
+				</div>
+				</div>
+
 
 		      </div>
 		    </div>
