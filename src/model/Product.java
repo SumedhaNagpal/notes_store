@@ -10,8 +10,9 @@ public class Product {
 	private String user_name;
 	private int product_semester;
 	private String product_type;
+	public String base64Image;
 	
-	public Product(int product_id,String title, String description, int price, String product_condition, String user_name, int product_semester, String product_type){
+	public Product(int product_id,String title, String description, int price, String product_condition, String user_name, int product_semester, String product_type,String base64Image){
 		this.product_id = product_id;
 		this.title = title;
 		this.description = description;
@@ -20,6 +21,7 @@ public class Product {
 		this.user_name = user_name;
 		this.product_semester = product_semester;
 		this.product_type = product_type;
+		this.base64Image = base64Image;
 	}
 	public int getProduct_semester() {
 		return product_semester;
@@ -34,12 +36,13 @@ public class Product {
 		this.product_type = product_type;
 	}
 	
-	public Product(int product_id,String title, String description, int price, String condition){
+	public Product(int product_id,String title, String description, int price, String condition,String base64Image){
 		this.product_id = product_id;
 		this.title = title;
 		this.description = description;
 		this.price = price;
 		this.product_condition = condition;
+		this.base64Image = base64Image;
 	}
 	public int getProduct_id() {
 		return product_id;
@@ -83,10 +86,17 @@ public class Product {
 	public void setProduct_condition(String product_condition) {
 		this.product_condition = product_condition;
 	}
+	public String getBase64Image() {
+        return base64Image;
+    }
+ 
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
+    }
 	@Override
 	public String toString() {
 		return "Product [product_id=" + product_id + ", user_id=" + user_id + ", title=" + title + ", description="
 				+ description + ", price=" + price + ", product_condition=" + product_condition + ", user_name="
-				+ user_name + ", product_semester=" + product_semester + ", product_type=" + product_type + "]";
+				+ user_name + ", product_semester=" + product_semester + ", product_type=" + product_type + ", pic=" + base64Image + "]";
 	}	
 }

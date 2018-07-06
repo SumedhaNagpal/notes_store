@@ -34,13 +34,16 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("user_id", user.getUser_id());
 			session.setAttribute("first_name", user.getFirst_name());			
 			session.setAttribute("email", email);
+			session.setAttribute("user", user);
+			
+            String page = "success.jsp?page=1";
 			
 			ProductDao productdao = new ProductDao();
 			ArrayList<Product> productList = new ArrayList<Product>();
 			productList = productdao.showAllProducts(user.getUser_id());
 			session.setAttribute("product list", productList);
 //			request.setAttribute("product list", productList);
-//			request.getRequestDispatcher("success.jsp").forward(request, response);
+//			request.getRequestDispatcher(page).forward(request, response);
 			response.sendRedirect("success.jsp?page=1");
 		
 		}

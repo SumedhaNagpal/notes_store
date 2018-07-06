@@ -14,8 +14,9 @@ CREATE TABLE `user` (
   `branch` varchar(64) DEFAULT NULL,
   `current_year` int(11) DEFAULT NULL,
   `password_hash` varchar(64) NOT NULL,  
+  `photo` mediumblob,
   PRIMARY KEY (`user_id`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
 CREATE TABLE `product` (

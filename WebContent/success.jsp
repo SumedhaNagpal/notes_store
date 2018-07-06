@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html;charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.*, java.util.*, javax.servlet.*"  %>
 <%@ page import="model.Product" %>
@@ -30,6 +31,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 	
 	<% 	} else {	%>
 			
+			
 			<jsp:include page="sidebar.jsp" />
 			
 			<!-- !PAGE CONTENT! -->
@@ -37,10 +39,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			
 			  <!-- Header -->
 			  <header id="portfolio">
-			    <a href="#"><img src="/w3images/avatar_g2.jpg" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
+			    <a href="#"><img src="data:image/jpg;base64,${user.base64Image}" style="width:65px;" class="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"></a>
 			    <span class="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey" onclick="w3_open()"><i class="fa fa-bars"></i></span>
 			    <div class="w3-container">
-			    <h1><b>My Portfolio</b></h1>
+			   <h2>Hello, <%= session.getAttribute( "first_name" ) %></h2>
 			    <div class="w3-section w3-bottombar w3-padding-16">
 			      <span class="w3-margin-right">Filter:</span> 
 			      <button class="w3-button w3-black">ALL</button>
@@ -68,15 +70,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			  %>
 			  
 			  <!-- First Photo Grid-->
+			  
 			  <div class="w3-row-padding" style="text-align: center">
 			    <%
+			    	
 			    	ArrayList<Product> productList = new ArrayList<Product>();
 			    	productList = (ArrayList)session.getAttribute("product list");
 			    	for(int i = itemNo - 1; i < productList.size() && i < itemNo + 6 - 1; i++){
 			    		Product product = productList.get(i);
 		   		 %>
 			    <div class="w3-third w3-container w3-margin-bottom">
-			      <img src="http://via.placeholder.com/350x150" alt="Norway" style="width:100%" class="w3-hover-opacity">
+			      <img src="data:image/png;base64,<%= product.getBase64Image() %>" alt="Norway" style="width:100%" class="w3-hover-opacity">
 			      <div class="w3-container w3-white">
 			        <p><b><%= product.getTitle() %></b></p>
 			        <p><b> ₹ <%= product.getPrice() %></b></p>
@@ -95,7 +99,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 					      </div>
 					      <div class="modal-body">
 					        <div id="product-details">
-					        	<img src="http://via.placeholder.com/350x150" alt="Norway" style="width:100%" class="w3-hover-opacity">
+					        	<img src="data:image/jpg;base64,<%= product.getBase64Image() %>" alt="Norway" style="width:100%" class="w3-hover-opacity">
 								<div>
 									<h4>DESCRIPTION</h4>
 									<p><%= product.getDescription() %></p>

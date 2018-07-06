@@ -1,10 +1,14 @@
 package dao;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 import model.Product;
@@ -23,9 +27,9 @@ public class ProductDao {
 		}
     }
 	
-	public boolean addProduct(int user_id, String title, String description, int price, String product_condition, int product_semester, String product_type) {
-		String query = "INSERT INTO product(user_id, title, description, price, product_condition, product_semester, product_type) "
-				+ "VALUES(?,?,?,?,?,?,?)";
+	public boolean addProduct(int user_id, String title, String description, int price, String product_condition, int product_semester, String product_type,InputStream inputStream) {
+		String query = "INSERT INTO product(user_id, title, description, price, product_condition, product_semester, product_type, pic) "
+				+ "VALUES(?,?,?,?,?,?,?,?)";
 		PreparedStatement pst;
 		try {
 			pst = connection.prepareStatement(query);
@@ -36,6 +40,10 @@ public class ProductDao {
 			pst.setString(5, product_condition);
 			pst.setInt(6, product_semester);
 			pst.setString(7, product_type);
+			if (inputStream != null) {
+                // fetches input stream of the upload file for the blob column
+                pst.setBlob(8, inputStream);
+            }
 			
 			int num = pst.executeUpdate();
 			if(num>0) {
@@ -68,7 +76,27 @@ public class ProductDao {
 				String first_name = result.getString("first_name");
 				String last_name = result.getString("last_name");
 				String user_name = first_name + " " + last_name;
-				Product prod = new Product(product_id,title, description, price, product_condition, user_name, product_semester, product_type);
+				
+				Blob blob = result.getBlob("pic");
+				
+				InputStream inputStream = blob.getBinaryStream();
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                 
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);                  
+                }
+                 
+                byte[] imageBytes = outputStream.toByteArray();
+                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                 
+                 
+                inputStream.close();
+                outputStream.close();
+                
+       
+				Product prod = new Product(product_id,title, description, price, product_condition, user_name, product_semester, product_type, base64Image);
 				productList.add(prod);
 			}
 		} catch(Exception e) {
@@ -92,7 +120,25 @@ public class ProductDao {
 				int price = result.getInt("price");
 				int product_id = result.getInt("product_id");
 				String condition = result.getString("product_condition");
-				Product prod = new Product(product_id,title, description, price, condition);
+				Blob blob = result.getBlob("pic");
+				
+				InputStream inputStream = blob.getBinaryStream();
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                 
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);                  
+                }
+                 
+                byte[] imageBytes = outputStream.toByteArray();
+                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                 
+                 
+                inputStream.close();
+                outputStream.close();
+                
+				Product prod = new Product(product_id,title, description, price, condition,base64Image);
 				productList.add(prod);
 			}
 		} catch(Exception e) {
