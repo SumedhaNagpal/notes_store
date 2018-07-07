@@ -117,6 +117,24 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
         </form>
         </div>
         
+        <script>
+		// Script to open and close sidebar																																																					
+		
+		function w3_open() {
+		    document.getElementById("mySidebar").style.display = "block";
+		    document.getElementById("myOverlay").style.display = "block";
+		}
+		 
+		function w3_close() {
+		    document.getElementById("mySidebar").style.display = "none";
+		    document.getElementById("myOverlay").style.display = "none";
+		}
+		document.getElementById("message").addEventListener("click", displayTextBox)
+		function displayTextBox(){
+			document.getElementById("sendMessage").style.display ="block";
+		}
+		</script>
+        
         <% } %>
 </body>
 </html>
