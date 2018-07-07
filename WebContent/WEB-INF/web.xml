@@ -42,6 +42,7 @@
   </servlet-mapping>
   
   <servlet>
+
     <servlet-name>EditProduct</servlet-name>
     <servlet-class>controller.EditProductController</servlet-class>
   </servlet>
@@ -59,5 +60,13 @@
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
   
+
+    <servlet-name>SendMessage</servlet-name>
+    <servlet-class>controller.SendMessageController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SendMessage</servlet-name>
+    <url-pattern>/sendMessage</url-pattern>
+  </servlet-mapping>
 
 </web-app>

@@ -75,6 +75,7 @@ public class ProductDao {
 				String product_type= result.getString("product_type");
 				String first_name = result.getString("first_name");
 				String last_name = result.getString("last_name");
+				int productUser_id = result.getInt("user_id");
 				String user_name = first_name + " " + last_name;
 				
 				Blob blob = result.getBlob("pic");
@@ -95,8 +96,8 @@ public class ProductDao {
                 inputStream.close();
                 outputStream.close();
                 
-       
-				Product prod = new Product(product_id,title, description, price, product_condition, user_name, product_semester, product_type, base64Image);
+				Product prod = new Product(product_id,productUser_id,title, description, price, product_condition, user_name, product_semester, product_type, base64Image);
+
 				productList.add(prod);
 			}
 		} catch(Exception e) {
