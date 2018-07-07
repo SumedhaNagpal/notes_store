@@ -146,6 +146,48 @@ public class ProductDao {
 		}
 		return productList;
 	}
+	public ArrayList<Product> searchProducts(String keyword) {
+		
+		ArrayList<Product> productList = new ArrayList<Product>();
+		String query = "Select * from product where product.title like '%" + keyword + "%' OR product.description like '%" + keyword + "'";
+				
+		System.out.println(query);
+		PreparedStatement pst;
+		try {
+			pst = connection.prepareStatement(query);
+			ResultSet result = pst.executeQuery(query);
+			while(result.next()) {
+				String title = result.getString("title");
+				String description = result.getString("description");
+				int price = result.getInt("price");
+				int product_id = result.getInt("product_id");
+				String condition = result.getString("product_condition");
+				Blob blob = result.getBlob("pic");
+				
+				InputStream inputStream = blob.getBinaryStream();
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                byte[] buffer = new byte[4096];
+                int bytesRead = -1;
+                 
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    outputStream.write(buffer, 0, bytesRead);                  
+                }
+                 
+                byte[] imageBytes = outputStream.toByteArray();
+                String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+                 
+                 
+                inputStream.close();
+                outputStream.close();
+                
+				Product prod = new Product(product_id,title, description, price, condition,base64Image);
+				productList.add(prod);
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		return productList;
+	}
 	
 public int getMyProductCount(int user_id) {
 		

@@ -47,4 +47,13 @@
     <url-pattern>/myProducts</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>SearchProducts</servlet-name>
+    <servlet-class>controller.SearchController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SearchProducts</servlet-name>
+    <url-pattern>/search</url-pattern>
+  </servlet-mapping>
+  
 </web-app>
