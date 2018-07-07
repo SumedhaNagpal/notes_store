@@ -116,7 +116,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 									<h4>PRICE</h4>
 									<p>₹ <%= product.getPrice() %></p>
 								</div>
-								<button type="button" class ="btn btn-warning">BUY <i class="fa fa-shopping-cart" aria-hidden="true"></i></button>
+								<button type="button" class ="btn btn-warning" id="message">Message <i class="fa fa-envelope" aria-hidden="true"></i></button>
+					       		<form id="sendMessage"method="post" action="sendMessage" style="margin-top:6px; display:none">
+					       			<textarea class="form-control" name="messageText">Hi! I am interested to buy these books/notes</textarea>
+					       			<input type="hidden" name ="toId" value="<%= product.getUser_id()%>">
+					       			<input type="submit" value="Send" class="btn btn-success" style="margin-top:6px">
+					       		</form>
 					        </div>
 					      </div>
 					      <div class="modal-footer">
@@ -129,27 +134,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 
 			      </div>
 			    </div>
+			    <script>
+			    document.getElementById("product_" + <%=product.getProduct_id()%>).addEventListener('hidden.bs.modal', function(){
+			    	console.log("event fired");
+			    	document.getElementById("sendMessage").style.display ="none";
+			    })
+			    </script>
 			    <% } %>
 			  </div>
-			  
-			  <%-- <!-- Second Photo Grid-->
-			  <div class="w3-row-padding">
-			  <%
-			    	for(int i = itemNo + 3; i < productList.size() && i < itemNo + perPageCount; i++){
-			    		Product product = productList.get(i);
-		   	   %>
-			    <div class="w3-third w3-container w3-margin-bottom">
-			      <img src="http://via.placeholder.com/350x150" alt="Norway" style="width:100%" class="w3-hover-opacity">
-			      <div class="w3-container w3-white">
-			        <p><b><%= product.getTitle() %></b></p>
-			        <p><%= product.getDescription() %></p>
-			        <p><b> ₹ <%= product.getPrice() %></b></p>
-			      </div>
-			    </div>
-			    <% } %> 
-			  </div> --%>
-			  
-			  
+	 
 			
 			  <!-- Pagination -->
 			  <div class="w3-center w3-padding-32">
@@ -340,8 +333,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			        <span class="w3-tag w3-grey w3-small w3-margin-bottom">IKEA</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">NORWAY</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">DIY</span>
 			        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Ideas</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Baby</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Family</span>
 			        <span class="w3-tag w3-grey w3-small w3-margin-bottom">News</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Clothing</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Shopping</span>
-			        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Sports</span> <span class="w3-tag w3-grey w3-small w3-margin-bottom">Games</span>
-			      </p>
+			        <span class="w3-tag w3-grey w3-small w3-margin-bottom">Sports</span> <span class=		w3-tag w3-grey w3-small w3-margin-bottom">Games</span>
+			      </p>																																																																																							
 			    </div>
 			
 			  </div>
@@ -353,7 +346,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			</div>
 			
 			<script>
-			// Script to open and close sidebar
+			// Script to open and close sidebar																																																					
 			
 			function w3_open() {
 			    document.getElementById("mySidebar").style.display = "block";
@@ -363,6 +356,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			function w3_close() {
 			    document.getElementById("mySidebar").style.display = "none";
 			    document.getElementById("myOverlay").style.display = "none";
+			}
+			document.getElementById("message").addEventListener("click", displayTextBox)
+			function displayTextBox(){
+				document.getElementById("sendMessage").style.display ="block";
 			}
 			</script>
 		<% } %>

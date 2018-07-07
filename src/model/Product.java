@@ -12,8 +12,9 @@ public class Product {
 	private String product_type;
 	public String base64Image;
 	
-	public Product(int product_id,String title, String description, int price, String product_condition, String user_name, int product_semester, String product_type,String base64Image){
+	public Product(int product_id,int user_id, String title, String description, int price, String product_condition, String user_name, int product_semester, String product_type, String base64Image){
 		this.product_id = product_id;
+		this.user_id = user_id;
 		this.title = title;
 		this.description = description;
 		this.price = price;
