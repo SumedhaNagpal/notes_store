@@ -49,6 +49,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			      <button class="w3-button w3-white"><i class="fa fa-diamond w3-margin-right"></i>Design</button>
 			      <button class="w3-button w3-white w3-hide-small"><i class="fa fa-photo w3-margin-right"></i>Photos</button>
 			      <button class="w3-button w3-white w3-hide-small"><i class="fa fa-map-pin w3-margin-right"></i>Art</button>
+			      <br>
+			      <br>
+			      <form action="search">
+      				<input type="text" placeholder="Search.." name="search">
+      				<input type="submit" value="Submit"></button>
+    			</form>
 			    </div>
 			    </div>
 			  </header>
