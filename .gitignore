@@ -2,8 +2,11 @@
 # Eclipse
 ######################
  
+<<<<<<< HEAD
 src/util/DBUtil.java
 WebContent/WEB-INF/lib/
+=======
+>>>>>>> edit-products
 *.class
 *.pydevproject
 .project
@@ -16,6 +19,7 @@ local.properties
 .classpath
 .settings/
 .loadpath
+WebContent/WEB-INF/lib/jstl-1.2.jar
 
 # External tool builders
 .externalToolBuilders/

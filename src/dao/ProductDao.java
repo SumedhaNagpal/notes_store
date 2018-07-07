@@ -189,7 +189,7 @@ public class ProductDao {
 		return productList;
 	}
 	
-public int getMyProductCount(int user_id) {
+	public int getMyProductCount(int user_id) {
 		
 		String totalCountOfMyProducts = "SELECT COUNT(product_id) FROM product WHERE product.user_id = " + user_id;
 		PreparedStatement pst;
@@ -204,6 +204,34 @@ public int getMyProductCount(int user_id) {
 			e.printStackTrace();
 		}
 		return count;
+	}
+
+	public boolean editProduct(int product_id, String title, String description, int price, String product_condition, int product_semester, String product_type) {
+		String editQuery = "UPDATE product "
+				+ "SET title=?, description=?, price=?, product_condition=?, product_semester=?, product_type=?"	
+				+ " WHERE product_id=?";
+		
+		PreparedStatement pst;
+		try {
+			pst = connection.prepareStatement(editQuery);
+			pst.setString(1, title);
+			pst.setString(2, description);
+			pst.setInt(3, price);
+			pst.setString(4, product_condition);
+			pst.setInt(5, product_semester);
+			pst.setString(6, product_type);
+			pst.setInt(7, product_id);
+			
+			int rs = pst.executeUpdate();
+			if(rs>0)
+				return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+		
 	}
 	
 }

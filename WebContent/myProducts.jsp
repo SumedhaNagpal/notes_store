@@ -59,8 +59,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 		<!--Photo Grid-->
 		  <div class="w3-row-padding" style="text-align: center">
 		    <%
-		    	ArrayList<Product> productList = new ArrayList<Product>();
-		    	productList = (ArrayList)session.getAttribute("my product list");
+		    	ArrayList<Product> productList = new ArrayList<Product>();		    
+		    	productList = (ArrayList<Product>)session.getAttribute("my product list");		    	
 		    	for(int i = 0; i < productList.size() && i < 6; i++){
 		    		Product product = productList.get(i);
 	   		 %>
@@ -71,7 +71,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 		        <p><b> ₹ <%= product.getPrice() %></b></p>
 		        <div style="margin-bottom: 24px">
 		        <button type="button class" class="btn btn-info " data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>">View Details</button>
-		        <button type="button class" class="btn btn-warning" data-toggle="modal" data-target="#editProduct_<%= product.getProduct_id()%>">Edit</button>
+		        <button type="button class" class="btn btn-warning" data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>_edit">Edit</button>
 		        <button type="button class" class="btn btn-danger " data-toggle="modal" data-target="#deleteProduct_<%= product.getProduct_id()%>">Delete</button>
 		        </div>
 			
@@ -110,6 +110,79 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 				  </div>
 				</div>
 				
+
+
+
+
+
+				<!--Modal-edit product-->
+				
+				<div id="product_<%= product.getProduct_id()%>_edit" class="modal fade" role="dialog">
+				  <div class="modal-dialog">
+
+
+				    <div class="modal-content">
+				    	<div class="modal-header">
+				        	<button type="button" class="close" data-dismiss="modal">&times;</button>
+				        	<h4 class="modal-title"><b><%= product.getTitle() %></b></h4>
+				      	</div>				          
+				            <div class="modal-body">	                
+				                <form  method="POST" action="editProduct">
+                				  <div class="form-group">
+				                    <label for="title">Title </label>
+                				    <input type="text" class="form-control" name="title" placeholder="<%=product.getTitle()%>" value="<%=product.getTitle()%>"/>
+				                  </div>
+                				  <div class="form-group">
+				                    <label for="description">Description </label>
+                				    <input type="text" class="form-control" name="description" placeholder="<%=product.getDescription()%>" value="<%=product.getDescription()%>"/>
+				                  </div>
+                    			  <div class="form-group">
+				                    <label for="price">Price </label>
+                				    <input type="number" class="form-control" name="price" placeholder="<%=product.getPrice()%>" value="<%=product.getPrice()%>"/>
+                  				  </div>
+                                  <div class="form-group">
+               					     <label for="condition">Condition </label>
+                      				 <input type="text" class="form-control" name="product_condition" placeholder="<%=product.getProduct_condition()%>" value="<%=product.getProduct_condition()%>"/>
+				                  </div>
+				                  <div class="form-group">
+               					     <label for="semester">Semester </label>
+                      				 <select name="product_semester" value="<%=product.getProduct_semester()%>">
+										<option>1 </option>
+										<option>2 </option>
+										<option>3 </option>
+										<option>4 </option>
+										<option>5 </option>
+										<option>6 </option>
+										<option>7 </option>
+										<option>8 </option>								
+									</select>  
+				                  </div>
+
+				                  <div class="form-group">
+               					     <label for="type">Type </label>
+                      				 <select name="product_type" value = "<%=product.getProduct_type()%>">
+										<option>Book</option>
+										<option>Notes</option>
+										<option>Other</option>								
+									</select>  
+				                  </div>
+
+				                  <input type="hidden" type="number" value="<%=product.getProduct_id()%>" name="product_id" />
+                    
+                				  <button type="submit" class="btn btn-primary">Submit</button>
+                				</form>
+                			</div> 
+
+
+        				</form>
+		            </div>
+
+
+
+				  </div>
+				
+				</div>
+				</div>
 
 
 		      </div>
