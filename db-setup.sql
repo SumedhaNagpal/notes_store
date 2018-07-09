@@ -39,15 +39,16 @@ CREATE TABLE `product` (
 CREATE TABLE `message` (
   `message_id` int(11) NOT NULL AUTO_INCREMENT,
   `to_id` int(11) NOT NULL,
-  `from_id` varchar(64) NOT NULL,
+  `from_id` int(64) NOT NULL,
   `message_text` text DEFAULT NULL,
+  `message_time` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`message_id`), 
   FOREIGN KEY (`to_id`) REFERENCES user(user_id),
   FOREIGN KEY (`from_id`) REFERENCES user(user_id)
 );
 
 CREATE TABLE `room` (
-  `room_id` varchar(64) NOT NULL AUTO_INCREMENT,
+  `room_id` varchar(64) NOT NULL,
   `person1` int(11) NOT NULL,
   `person2` int(11) NOT NULL,
   PRIMARY KEY (`room_id`), 

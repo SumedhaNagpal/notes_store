@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.MessageDao;
+import model.Message;
 
 /**
  * Servlet implementation class MessageController
@@ -26,21 +28,28 @@ public class SendMessageController extends HttpServlet {
         super();
     }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		int fromId = (Integer)session.getAttribute("user_id");
 		
 		String messageText = request.getParameter("messageText");
 		int toId = Integer.parseInt(request.getParameter("toId"));
+		String time = request.getParameter("time");
+		
+		String requestType = request.getParameter("type");
 		
 		MessageDao messagedao = new MessageDao();
 		String roomId = messagedao.getRoom(toId, fromId);
-		if(messagedao.insertMessage(toId, fromId, messageText)) {			
-			request.setAttribute("roomId", roomId);
-			request.getRequestDispatcher("message.jsp").forward(request, response);;
+		ArrayList<Message> messageList = new ArrayList<Message>();
+		messageList = messagedao.getMessages(toId, fromId);
+		if(messagedao.insertMessage(toId, fromId, messageText, time)) {	
+			if(requestType != null) {
+				request.setAttribute("roomId", roomId);
+				request.setAttribute("toId", toId);
+				request.setAttribute("message list", messageList);
+				request.getRequestDispatcher("message.jsp").forward(request, response);
+			}
 		}
 		
 	}
