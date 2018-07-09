@@ -40,9 +40,7 @@
     <servlet-name>MyProducts</servlet-name>
     <url-pattern>/myProducts</url-pattern>
   </servlet-mapping>
-  
   <servlet>
-
     <servlet-name>EditProduct</servlet-name>
     <servlet-class>controller.EditProductController</servlet-class>
   </servlet>
@@ -50,7 +48,6 @@
     <servlet-name>EditProduct</servlet-name>
     <url-pattern>/editProduct</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <servlet-name>SearchProducts</servlet-name>
     <servlet-class>controller.SearchController</servlet-class>
@@ -59,8 +56,7 @@
     <servlet-name>SearchProducts</servlet-name>
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
-  
-
+  <servlet>
     <servlet-name>SendMessage</servlet-name>
     <servlet-class>controller.SendMessageController</servlet-class>
   </servlet>
@@ -68,5 +64,4 @@
     <servlet-name>SendMessage</servlet-name>
     <url-pattern>/sendMessage</url-pattern>
   </servlet-mapping>
-
 </web-app>

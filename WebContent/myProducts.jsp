@@ -65,14 +65,23 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 		    		Product product = productList.get(i);
 	   		 %>
 		    <div class="w3-third w3-container w3-margin-bottom">
-		      <img src="data:image/png;base64,<%= product.getBase64Image() %>" alt="Norway" style="width:100%" class="w3-hover-opacity">
-		      <div class="w3-container w3-white">
+				<%
+			    	if(!product.getBase64Image().isEmpty()){
+			    		
+			    %>
+			      <img src="data:image/png;base64,<%= product.getBase64Image() %>"  style="width:100%" class="w3-hover-opacity">
+			     <%}
+			    	else{
+			      %>
+			    <img alt="no image" src="http://via.placeholder.com/350x150" style="width:100%" class="w3-hover-opacity">
+			      <%} %>
+			    <div class="w3-container w3-white">
 		        <p><b><%= product.getTitle() %></b></p>
 		        <p><b> ₹ <%= product.getPrice() %></b></p>
 		        <div style="margin-bottom: 24px">
-		        <button type="button class" class="btn btn-info " data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>">View Details</button>
-		        <button type="button class" class="btn btn-warning" data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>_edit">Edit</button>
-		        <button type="button class" class="btn btn-danger " data-toggle="modal" data-target="#deleteProduct_<%= product.getProduct_id()%>">Delete</button>
+		        <button type="button class" class="btn btn-info " data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>" style="margin:4px;">View Details</button>
+		        <button type="button class" class="btn btn-warning" data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>_edit" style="margin:4px;">Edit</button>
+		        <button type="button class" class="btn btn-danger " data-toggle="modal" data-target="#deleteProduct_<%= product.getProduct_id()%>" style="margin:4px;">Delete</button>
 		        </div>
 			
 				
@@ -89,7 +98,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 				      </div>
 				      <div class="modal-body">
 				        <div id="product-details">
-				        	<img src="data:image/png;base64,<%= product.getBase64Image() %>" alt="Norway" style="width:100%" class="w3-hover-opacity">
+						<%
+					    	if(!product.getBase64Image().isEmpty()){
+					    %>
+					      <img src="data:image/png;base64,<%= product.getBase64Image() %>"  alt="N"style="width:100%" class="w3-hover-opacity">
+					     <%}
+					    	else{
+					      %>
+					    <img alt="no image" src="http://via.placeholder.com/350x150" style="width:100%" class="w3-hover-opacity">
+					      <%} %>
 							<div>
 								<h4>DESCRIPTION</h4>
 								<p><%= product.getDescription() %></p>

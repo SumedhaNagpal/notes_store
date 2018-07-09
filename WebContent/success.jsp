@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.*, java.util.*, javax.servlet.*"  %>
 <%@ page import="model.Product" %>
+<%@ page import="java.util.Date, java.text.DateFormat, java.text.SimpleDateFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -86,7 +87,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			    		Product product = productList.get(i);
 		   		 %>
 			    <div class="w3-third w3-container w3-margin-bottom">
-			      <img src="data:image/png;base64,<%= product.getBase64Image() %>" alt="Norway" style="width:100%" class="w3-hover-opacity">
+			    <%
+			    	if(!product.getBase64Image().isEmpty()){
+			    		
+			    %>
+			      <img src="data:image/png;base64,<%= product.getBase64Image() %>"  style="width:100%" class="w3-hover-opacity">
+			     <%}
+			    	else{
+			      %>
+			    <img alt="no image" src="http://via.placeholder.com/350x150" style="width:100%" class="w3-hover-opacity">
+			      <%} %>
 			      <div class="w3-container w3-white">
 			        <p><b><%= product.getTitle() %></b></p>
 			        <p><b> ₹ <%= product.getPrice() %></b></p>
@@ -105,8 +115,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 					      </div>
 					      <div class="modal-body">
 					        <div id="product-details">
-					        	<img src="data:image/jpg;base64,<%= product.getBase64Image() %>" alt="Norway" style="width:100%" class="w3-hover-opacity">
-								<div>
+							<%
+							    	if(!product.getBase64Image().isEmpty()){
+							    		
+							    %>
+							      <img src="data:image/png;base64,<%= product.getBase64Image() %>"  style="width:100%" class="w3-hover-opacity">
+							     <%}
+							    	else{
+							      %>
+							    <img alt="no image" src="http://via.placeholder.com/350x150" style="width:100%" class="w3-hover-opacity">
+							      <%} %>								<div>
 									<h4>DESCRIPTION</h4>
 									<p><%= product.getDescription() %></p>
 									<h4>PRODUCT CONDITION</h4>
@@ -118,8 +136,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 								</div>
 								<button type="button" class ="btn btn-warning" id="message">Message <i class="fa fa-envelope" aria-hidden="true"></i></button>
 					       		<form id="sendMessage"method="post" action="sendMessage" style="margin-top:6px; display:none">
+					       			<%	DateFormat dateFormat = new SimpleDateFormat("yyy/MM/dd HH:mm:ss");
+					       				Date date = new Date();
+					       			%>
 					       			<textarea class="form-control" name="messageText">Hi! I am interested to buy these books/notes</textarea>
 					       			<input type="hidden" name ="toId" value="<%= product.getUser_id()%>">
+					       			<input type="hidden" name ="type" value="redirect"/>
+					       			<input type="hidden" name ="time" value="<%= dateFormat.format(date) %>"/>
 					       			<input type="submit" value="Send" class="btn btn-success" style="margin-top:6px">
 					       		</form>
 					        </div>

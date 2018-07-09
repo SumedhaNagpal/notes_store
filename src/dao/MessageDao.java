@@ -1,11 +1,15 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.UUID;
 
+import model.Message;
+import model.Product;
 import util.DBUtil;
 
 public class MessageDao {
@@ -20,15 +24,16 @@ Connection connection;
 		}
     }
 	
-	public boolean insertMessage(int to_id, int from_id, String messageText) {
-		String query = "INSERT INTO message(to_id, from_id, message_text) "
-				+ "VALUES(?,?,?)";
+	public boolean insertMessage(int to_id, int from_id, String messageText, String time) {
+		String query = "INSERT INTO message(to_id, from_id, message_text, message_time) "
+				+ "VALUES(?,?,?,?)";
 		PreparedStatement pst;
 		try {
 			pst = connection.prepareStatement(query);
 			pst.setInt(1, to_id);
 			pst.setInt(2, from_id);
 			pst.setString(3, messageText);
+			pst.setString(4, time);
 			int num = pst.executeUpdate();
 			if(num>0) {
 				return true;
@@ -85,4 +90,27 @@ Connection connection;
 		}
 		return null;
 	}
+	
+	public ArrayList<Message> getMessages(int toId, int fromId) {
+		ArrayList<Message> messageList = new ArrayList<Message>();
+		String checkExistingRoom = "SELECT * FROM message WHERE (to_id = '" + toId + "' AND from_id ='" + fromId + "') OR (to_id = '" + fromId + "' AND from_id ='" + toId + "') ORDER BY message_time";
+		PreparedStatement pst;
+	
+		try {
+			pst = connection.prepareStatement(checkExistingRoom);
+			ResultSet result = pst.executeQuery(checkExistingRoom);
+			while(result.next()) {
+				int to_id = result.getInt("to_id");
+				int from_id = result.getInt("from_id");
+				String message_text = result.getString("message_text");
+				
+				Message message = new Message(to_id, from_id, message_text);
+				messageList.add(message);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return messageList;
+	}
+	
 }
