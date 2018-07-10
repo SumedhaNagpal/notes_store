@@ -7,8 +7,7 @@ import java.sql.Statement;
 public class DBUtil {
 	public static Connection getMySqlConnection() throws Exception {
 		Class.forName("com.mysql.jdbc.Driver");
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/NotesStore", "root", "123");
-		//System.out.println("Connection returned from dbutil");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/NotesStore", "root", "123");		
 		return con;
 	}
 

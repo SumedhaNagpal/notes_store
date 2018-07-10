@@ -20,8 +20,7 @@ public class UserDao {
 	
 	public UserDao() {		
         try {
-			connection = DBUtil.getMySqlConnection();
-			//System.out.println("connection made in userdao/userdao object made");
+			connection = DBUtil.getMySqlConnection();			
 		} catch (Exception e) {			
 			e.printStackTrace();
 		}
@@ -30,13 +29,11 @@ public class UserDao {
 	public boolean authenticate(String email, String password) {				
 		try {				
 			String query = "SELECT * FROM user WHERE email=? AND password_hash=?";
-			PreparedStatement pst = connection.prepareStatement(query);
+			PreparedStatement pst = connection.prepareStatement(query);			
 			pst.setString(1, email);
 			pst.setString(2, password);
-			ResultSet rs = pst.executeQuery();
-			//System.out.println("Query executed in dao authenticate");
-			if(rs.next()) {
-				//System.out.println("rs.next in dao authenticate");
+			ResultSet rs = pst.executeQuery();			
+			if(rs.next()) {				
 				return true;
 			}
 		} catch (Exception e) {			
