@@ -28,7 +28,7 @@ public class WebSocketMessage {
 	      for(Session client : clients){
 	    	  String clientParameter = client.getPathParameters().get("parameter");
 	    	  System.out.println(clientParameter + " " + param); 
-	        if (clientParameter.equals(param)){
+	        if (clientParameter.equals(param) && !session.equals(client)){
 	          client.getBasicRemote().sendText(message);
 	        }
 	      }

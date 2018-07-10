@@ -93,12 +93,12 @@ Connection connection;
 	
 	public ArrayList<Message> getMessages(int toId, int fromId) {
 		ArrayList<Message> messageList = new ArrayList<Message>();
-		String checkExistingRoom = "SELECT * FROM message WHERE (to_id = '" + toId + "' AND from_id ='" + fromId + "') OR (to_id = '" + fromId + "' AND from_id ='" + toId + "') ORDER BY message_time";
+		String getMessage = "SELECT * FROM message WHERE (to_id = '" + toId + "' AND from_id ='" + fromId + "') OR (to_id = '" + fromId + "' AND from_id ='" + toId + "') ORDER BY message_time";
 		PreparedStatement pst;
 	
 		try {
-			pst = connection.prepareStatement(checkExistingRoom);
-			ResultSet result = pst.executeQuery(checkExistingRoom);
+			pst = connection.prepareStatement(getMessage);
+			ResultSet result = pst.executeQuery(getMessage);
 			while(result.next()) {
 				int to_id = result.getInt("to_id");
 				int from_id = result.getInt("from_id");
@@ -111,6 +111,34 @@ Connection connection;
 			e.printStackTrace();
 		}
 		return messageList;
+	}
+	
+	public ArrayList<Message> getRecentChats(int user_id) {
+		ArrayList<Message> chatList = new ArrayList<Message>();
+		String getChats = "SELECT max(message_time), to_id, from_id, first_name, last_name  FROM message INNER JOIN user ON (message.to_id = user.user_id AND message.to_id <> " + user_id + ") OR (message.from_id = user.user_id AND message.from_id <> " + user_id + " )WHERE (to_id = " + user_id + " OR from_id = " + user_id + ") GROUP BY first_name ORDER BY max(message_time) DESC";
+		System.out.println(getChats);
+		PreparedStatement pst;
+		
+		try {
+			pst = connection.prepareStatement(getChats);
+			ResultSet result = pst.executeQuery(getChats);
+			while(result.next()) {
+				int toId;
+				toId = result.getInt("to_id");
+				if(toId == user_id) {
+					toId = result.getInt("from_id");
+				}
+				String first_name = result.getString("first_name");
+				String last_name = result.getString("last_name");
+				String name = first_name + " " + last_name;
+				
+				Message message = new Message(name, toId);
+				chatList.add(message);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return chatList;
 	}
 	
 }

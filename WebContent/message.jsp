@@ -10,12 +10,17 @@
 <link rel="stylesheet" href="css/message.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <div id = "main">
-<%
-	Date date = new Date();
-	DateFormat dateFormat = new SimpleDateFormat("yyy/MM/dd HH:mm:ss");
+<%	String messageText = (String) request.getAttribute("message text");
+	if(messageText != null){
+%>
+	<div class="container">
+  		<p id="messages"><%= messageText %></p>
+	</div> 
+<% }
 	ArrayList<Message> messageList = new ArrayList<Message>();
  	messageList = (ArrayList)request.getAttribute("message list");
  	for(int i = 0; i < messageList.size(); i++){
@@ -32,13 +37,9 @@
 	<%} %>
 <%  } %>
 </div>
-<div>
-	<form id = "inputMessage" action="sendMessage" method="POST">
-    <input name="messageText" class="form-control" id="inputmessage" type="text" autocomplete="off"/>
-	<input type="hidden" name ="toId" value="<%= request.getAttribute("toId")%>">
-	<input type="hidden" name ="time" value="<%= dateFormat.format(date) %>"/>
-    <button id="sendMessage" class="btn btn-success" value="" onclick="send()" /><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
- 	</form>
+<div id="sendMessageDisplay">
+   <input name="messageText" class="form-control" id="inputmessage" type="text" autocomplete="off"/>
+   <button id="sendMessage" class="btn btn-success" value="" onclick="send()" /><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
  </div>
  <script>window.scrollTo(0,document.body.scrollHeight);</script>
  
@@ -62,9 +63,8 @@
       //document.getElementById('messages').innerHTML 
       //  += '<br />Received message: ' + event.data;
       var mainDiv = document.getElementById("main");
-      console.log(mainDiv);
       var containerDiv = document.createElement('div');
-      containerDiv.className = 'container';
+      containerDiv.className = 'container darker';
       mainDiv.appendChild(containerDiv);
       
       var messagePara = document.createElement('p');
@@ -86,11 +86,33 @@
     function send() {
       var txt = document.getElementById('inputmessage').value;
       webSocket.send(txt);
-      <%	 dateFormat = new SimpleDateFormat("yyy/MM/dd HH:mm:ss");
-			 date = new Date();
+      
+      var mainDiv = document.getElementById("main");
+      var containerDiv = document.createElement('div');
+      containerDiv.className = 'container';
+      
+      var messagePara = document.createElement('p');
+      messagePara.id = 'messages';
+      messagePara.innerHTML = txt;
+      containerDiv.appendChild(messagePara);
+     
+      mainDiv.appendChild(containerDiv);
+      
+      <%	 DateFormat dateFormat = new SimpleDateFormat("yyy/MM/dd HH:mm:ss");
+			 Date date = new Date();
 		%>
+		$.ajax({
+            url: 'sendMessage',
+            type: 'POST',
+            data: {
+            	messageText : txt,
+            	time: '<%= dateFormat.format(date) %>',
+            	toId: '<%= request.getAttribute("toId")%>'
+            },             
+        });
       return false;
     }
+    
    
     
   </script>
