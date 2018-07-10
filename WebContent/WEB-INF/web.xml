@@ -64,4 +64,13 @@
     <servlet-name>SendMessage</servlet-name>
     <url-pattern>/sendMessage</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>ShowChats</servlet-name>
+    <servlet-class>controller.ShowChatsController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShowChats</servlet-name>
+    <url-pattern>/showChats</url-pattern>
+  </servlet-mapping>
 </web-app>

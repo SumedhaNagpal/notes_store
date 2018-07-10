@@ -43,13 +43,26 @@ public class SendMessageController extends HttpServlet {
 		String roomId = messagedao.getRoom(toId, fromId);
 		ArrayList<Message> messageList = new ArrayList<Message>();
 		messageList = messagedao.getMessages(toId, fromId);
-		if(messagedao.insertMessage(toId, fromId, messageText, time)) {	
+		System.out.println(messageText);
+		if(messageText != null) {
+			if(messagedao.insertMessage(toId, fromId, messageText, time)) {	
+				if(requestType != null) {
+					request.setAttribute("roomId", roomId);
+					request.setAttribute("toId", toId);
+					request.setAttribute("message list", messageList);
+					request.setAttribute("message text", messageText);
+					request.getRequestDispatcher("message.jsp").forward(request, response);
+				}
+			}
+		}
+		else {
 			if(requestType != null) {
 				request.setAttribute("roomId", roomId);
 				request.setAttribute("toId", toId);
 				request.setAttribute("message list", messageList);
 				request.getRequestDispatcher("message.jsp").forward(request, response);
 			}
+			
 		}
 		
 	}

@@ -134,8 +134,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 									<h4>PRICE</h4>
 									<p>₹ <%= product.getPrice() %></p>
 								</div>
-								<button type="button" class ="btn btn-warning" id="message">Message <i class="fa fa-envelope" aria-hidden="true"></i></button>
-					       		<form id="sendMessage"method="post" action="sendMessage" style="margin-top:6px; display:none">
+								<button type="button" class ="btn btn-warning message" >Message <i class="fa fa-envelope" aria-hidden="true"></i></button>
+					       		<form class="sendMessage"method="post" action="sendMessage" style="margin-top:6px; display:none">
 					       			<%	DateFormat dateFormat = new SimpleDateFormat("yyy/MM/dd HH:mm:ss");
 					       				Date date = new Date();
 					       			%>
@@ -158,9 +158,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			      </div>
 			    </div>
 			    <script>
-			    document.getElementById("product_" + <%=product.getProduct_id()%>).addEventListener('hidden.bs.modal', function(){
-			    	console.log("event fired");
-			    	document.getElementById("sendMessage").style.display ="none";
+			    $("#product_" + <%=product.getProduct_id()%>).on('hidden.bs.modal', function(){
+			    	$(".sendMessage").css("display", "none");
+			    	
 			    })
 			    </script>
 			    <% } %>
@@ -368,22 +368,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			<!-- End page content -->
 			</div>
 			
-			<script>
-			// Script to open and close sidebar																																																					
+			<script>																																																			
 			
-			function w3_open() {
-			    document.getElementById("mySidebar").style.display = "block";
-			    document.getElementById("myOverlay").style.display = "block";
-			}
-			 
-			function w3_close() {
-			    document.getElementById("mySidebar").style.display = "none";
-			    document.getElementById("myOverlay").style.display = "none";
-			}
-			document.getElementById("message").addEventListener("click", displayTextBox)
-			function displayTextBox(){
-				document.getElementById("sendMessage").style.display ="block";
-			}
+			
+			$(".message").click(function(){
+				console.log("here");
+				$(".sendMessage").css("display", "block");
+
+			});
+			
 			</script>
 		<% } %>
 

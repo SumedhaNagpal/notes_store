@@ -39,7 +39,7 @@ CREATE TABLE `product` (
 CREATE TABLE `message` (
   `message_id` int(11) NOT NULL AUTO_INCREMENT,
   `to_id` int(11) NOT NULL,
-  `from_id` int(64) NOT NULL,
+  `from_id` int(11) NOT NULL,
   `message_text` text DEFAULT NULL,
   `message_time` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`message_id`), 
