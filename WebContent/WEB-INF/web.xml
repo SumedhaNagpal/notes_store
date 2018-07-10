@@ -73,4 +73,13 @@
     <servlet-name>ShowChats</servlet-name>
     <url-pattern>/showChats</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DeleteProduct</servlet-name>
+    <servlet-class>controller.DeleteProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteProduct</servlet-name>
+    <url-pattern>/deleteProduct</url-pattern>
+  </servlet-mapping>
 </web-app>
