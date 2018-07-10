@@ -234,4 +234,18 @@ public class ProductDao {
 		
 	}
 	
+	public boolean deleteProduct(int product_id) {
+		String deleteQuery = "DELETE FROM product WHERE product_id = " + product_id +";";
+		try {
+			PreparedStatement pst = connection.prepareStatement(deleteQuery);
+			int rs = pst.executeUpdate();
+			if(rs>0) 
+				return true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
 }

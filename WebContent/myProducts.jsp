@@ -72,11 +72,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 		        <div style="margin-bottom: 24px">
 		        <button type="button class" class="btn btn-info " data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>">View Details</button>
 		        <button type="button class" class="btn btn-warning" data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>_edit">Edit</button>
-		        <button type="button class" class="btn btn-danger " data-toggle="modal" data-target="#deleteProduct_<%= product.getProduct_id()%>">Delete</button>
+		        <button type="button class" class="btn btn-danger" data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>_delete">Delete</button>
 		        </div>
 			
 				
-				 <!-- Modal -->
+				<!-- Modal -->
 				 
 				<div id="product_<%= product.getProduct_id()%>" class="modal fade" role="dialog">
 				  <div class="modal-dialog">
@@ -109,8 +109,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 				
 				  </div>
 				</div>
-				
-
 
 
 
@@ -171,18 +169,50 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
                     
                 				  <button type="submit" class="btn btn-primary">Submit</button>
                 				</form>
-                			</div> 
-
-
-        				</form>
+                			</div>         				
 		            </div>
+				  </div>				
+				</div>
 
 
-
-				  </div>
+				<!-- Modal-delete product -->
+				 
+				<div id="product_<%= product.getProduct_id()%>_delete" class="modal fade" role="dialog">
+				  <div class="modal-dialog">
 				
+				    <!-- Modal content-->
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <h4 class="modal-title"><b><%= product.getTitle() %></b></h4>
+				      </div>
+				      <div class="modal-body">
+				        <div id="product-details">				        							
+							<h4>DESCRIPTION</h4>
+							<p><%= product.getDescription() %></p>
+							<h4>PRICE</h4>
+							<p>₹ <%= product.getPrice() %></p>							
+				        </div>
+				        <h4><b>ARE YOU SURE YOU WANT TO REMOVE THIS PRODUCT?</b></h4>
+
+				        <button type="button" class="btn btn-danger" data-dismiss="modal">No</button> 
+				        <form method="POST" action="deleteProduct" style='display:inline;'>
+				        	<input type="hidden" type="number" value="<%=product.getProduct_id()%>" name="product_id"/>
+				        	<button type="submit" class="btn btn-success">Yes</button>				       
+				        </form>
+
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				      </div>
+				    </div>
+				
+				  </div>
 				</div>
-				</div>
+
+
+
+			  </div>
 
 
 		      </div>

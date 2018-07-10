@@ -40,7 +40,6 @@
     <servlet-name>MyProducts</servlet-name>
     <url-pattern>/myProducts</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>EditProduct</servlet-name>
     <servlet-class>controller.EditProductController</servlet-class>
@@ -49,7 +48,6 @@
     <servlet-name>EditProduct</servlet-name>
     <url-pattern>/editProduct</url-pattern>
   </servlet-mapping>
-
   <servlet>
     <servlet-name>SearchProducts</servlet-name>
     <servlet-class>controller.SearchController</servlet-class>
@@ -59,5 +57,12 @@
     <url-pattern>/search</url-pattern>
   </servlet-mapping>
   
-
+  <servlet>
+    <servlet-name>DeleteProduct</servlet-name>
+    <servlet-class>controller.DeleteProductController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteProduct</servlet-name>
+    <url-pattern>/deleteProduct</url-pattern>
+  </servlet-mapping>
 </web-app>
