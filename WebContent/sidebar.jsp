@@ -7,23 +7,14 @@
     </a>
     <img src="data:image/png;base64,${user.base64Image}" style="width:45%;" class="w3-round"><br><br>
     
-  <p class="w3-text-grey">Template by W3.CSS</p>
+  <p class="w3-text-grey">Hello, <%= session.getAttribute( "first_name" ) %></p>
   </div>
   <div class="w3-bar-block">
-    <a href='success.jsp?page=1' onclick="w3_close()" class="w3-bar-item w3-button w3-padding w3-text-teal"><i class="fa fa-th-large fa-fw w3-margin-right"></i>PORTFOLIO</a> 
-    <a href="#about" onclick="w3_close()" class="w3-bar-item w3-button w3-padding"><i class="fa fa-user fa-fw w3-margin-right"></i>ABOUT</a> 
+	<a href='success.jsp' class="w3-bar-item w3-button w3-padding"><i class="fa fa-shopping-cart fa-fw w3-margin-right" aria-hidden="true"></i> BUY NOTES AND BOOKS</a>	 	
  	<a href='sell.jsp' class="w3-bar-item w3-button w3-padding"><i class="fa fa-plus fa-fw w3-margin-right" aria-hidden="true"></i> SELL NOTES AND BOOKS</a>	
  	<a href='myProducts' class="w3-bar-item w3-button w3-padding"><i class="fa fa-book fa-fw w3-margin-right" aria-hidden="true"></i> MY NOTES AND BOOKS</a>
  	<a href='showChats' class="w3-bar-item w3-button w3-padding"><i class="fa fa-envelope fa-fw w3-margin-right" aria-hidden="true"></i>MESSAGES</a>	
  	<a href='logout' class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out fa-fw w3-margin-right" aria-hidden="true"></i>LOG OUT</a>	
-  </div>
-  <div class="w3-panel w3-large">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-pinterest-p w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
   </div>
 </nav>
 
