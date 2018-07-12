@@ -13,6 +13,7 @@ import java.io.InputStream;
 
 import model.User;
 import util.DBUtil;
+import util.PasswordUtil;
 
 public class UserDao {
 	
@@ -26,12 +27,35 @@ public class UserDao {
 		}
     }	
 	
-	public boolean authenticate(String email, String password) {				
+	public boolean authenticate(String email, String password) {
+		
+		PreparedStatement pst;
+		String salt="";
+		String saltquery = "SELECT salt FROM user WHERE email = ?";
+		//get salt of a particular user by using email
+		try {											
+			pst = connection.prepareStatement(saltquery);
+			pst.setString(1, email);
+			ResultSet saltrs = pst.executeQuery();
+			if(saltrs.next()) {
+				salt = saltrs.getString(1);
+			}
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("email not registered");			
+			e1.printStackTrace();
+			return false;
+		}
+		//regenerate password_hash using given password and stored salt
+		
+		String password_hash = PasswordUtil.generateSecurePassword(password, salt);
+		
+		//check if generated password hash matches password_hash of a user stored in DB 
 		try {				
 			String query = "SELECT * FROM user WHERE email=? AND password_hash=?";
-			PreparedStatement pst = connection.prepareStatement(query);			
+			pst = connection.prepareStatement(query);			
 			pst.setString(1, email);
-			pst.setString(2, password);
+			pst.setString(2, password_hash);
 			ResultSet rs = pst.executeQuery();			
 			if(rs.next()) {				
 				return true;
@@ -103,8 +127,13 @@ public class UserDao {
 	}
 	
 	
-	public boolean registerUser(String first_name, String last_name, String email, String branch, int current_year, String password_hash, InputStream inputStream) {
-		String query = "INSERT INTO user(first_name, last_name, email, branch, current_year, password_hash, photo) VALUES(?,?,?,?,?,?,?)";
+	public boolean registerUser(String first_name, String last_name, String email, String branch, int current_year, String password, InputStream inputStream) {
+		
+        String salt = PasswordUtil.getSalt(30);
+        String password_hash = PasswordUtil.generateSecurePassword(password, salt);
+
+
+		String query = "INSERT INTO user(first_name, last_name, email, branch, current_year, salt, password_hash, photo) VALUES(?,?,?,?,?,?,?,?)";
 		PreparedStatement pst;
 		try {
 			pst = connection.prepareStatement(query);
@@ -113,10 +142,11 @@ public class UserDao {
 			pst.setString(3, email);
 			pst.setString(4, branch);
 			pst.setInt(5, current_year);
-			pst.setString(6, password_hash);
+			pst.setString(6, salt);
+			pst.setString(7, password_hash);
 			if (inputStream != null) {
                 // fetches input stream of the upload file for the blob column
-                pst.setBlob(7, inputStream);
+                pst.setBlob(8, inputStream);
             }
 			
 			int num = pst.executeUpdate();
