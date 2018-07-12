@@ -54,7 +54,7 @@ public class AddProductController extends HttpServlet {
 		if(productdao.addProduct(user_id, title, description, price, product_condition, product_semester, product_type,inputStream)) {			
 			PrintWriter out = response.getWriter();
 			out.print("Add product works");
-			response.sendRedirect("MyProducts");
+			response.sendRedirect("myProducts");
 
 		}
 		

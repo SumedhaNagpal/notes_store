@@ -21,7 +21,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 </style>
 </head>
 <body class="w3-light-grey w3-content" style="max-width:1600px">
-<%
+	<%
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 		httpResponse.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); 
     	if ((session.getAttribute("email") == null) || (session.getAttribute("email") == "")) {
@@ -73,7 +73,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			     <%}
 			    	else{
 			      %>
-			    <img alt="no image" src="http://via.placeholder.com/350x150" style="width:100%" class="w3-hover-opacity">
+			    <img alt="no image" src="images/no-image.png" style="width:100%" class="w3-hover-opacity">
 			      <%} %>
 			    <div class="w3-container w3-white">
 		        <p><b><%= product.getTitle() %></b></p>
@@ -112,8 +112,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 								<p><%= product.getDescription() %></p>
 								<h4>PRODUCT CONDITION</h4>
 								<p><%= product.getProductCondition() %></p>
-								<h4>POSTED BY</h4>
-								<p><%= product.getUser_name() %></p>
 								<h4>PRICE</h4>
 								<p>₹ <%= product.getPrice() %></p>
 							</div>
@@ -226,14 +224,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 				
 				  </div>
 				</div>
-
-
+				
 
 			  </div>
-
-
-		      </div>
 		    </div>
+
 		    <% } %>
 		  </div>
 		  
@@ -267,9 +262,9 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			    </div>
 			  </div>
 			  <%if(totalProducts == 0){ %>
-			 	<h3 style="margin-left:30px">You haven't sold any book yet. Sell your old books and notes and help someone! :)</h3>
+			 	<h3 style="margin-left:30px">You havent sold any book yet. Sell your old books and notes and help someone! :)</h3>
 			  <% } %>
-		  </div>
+		</div>
 		  
 		  <script>
 		  function w3_open() {
