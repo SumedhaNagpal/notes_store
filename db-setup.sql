@@ -3,6 +3,8 @@ CREATE DATABASE IF NOT EXISTS NotesStore;
 USE NotesStore;
 
 DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS message;
+DROP TABLE IF EXISTS room;
 DROP TABLE IF EXISTS user;
 
 CREATE TABLE `user` (
@@ -12,12 +14,11 @@ CREATE TABLE `user` (
   `email` varchar(64) NOT NULL UNIQUE,
   `branch` varchar(64) DEFAULT NULL,
   `current_year` int(11) DEFAULT NULL,
+  `salt` varchar(64) NOT NULL,
   `password_hash` varchar(64) NOT NULL,
   `photo` mediumblob,  
   PRIMARY KEY (`user_id`)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-DROP TABLE IF EXISTS `product`;
 
 CREATE TABLE `product` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -28,12 +29,12 @@ CREATE TABLE `product` (
   `product_condition` varchar(64) DEFAULT NULL,
   `product_semester` tinyint DEFAULT NULL,
   `product_type` varchar(64) DEFAULT NULL,
- `pic` mediumblob,  
+  `pic` mediumblob, 
+  `created_at` TIMESTAMP NOT NULL DEFAULT NOW(),
+  `updated_at` TIMESTAMP NOT NULL DEFAULT NOW() ON UPDATE now(),
   PRIMARY KEY (`product_id`), 
   FOREIGN KEY (`user_id`) REFERENCES user(user_id)
 )ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
 
 
 CREATE TABLE `message` (

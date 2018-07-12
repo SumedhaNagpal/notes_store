@@ -60,7 +60,8 @@ public class ProductDao {
 	
 	public ArrayList<Product> showAllProducts(int user_id) {
 		ArrayList<Product> productList = new ArrayList<Product>();
-		String showProduct = "SELECT * FROM product INNER JOIN user ON product.user_id = user.user_id WHERE product.user_id <> " + user_id;
+		String showProduct = "SELECT * FROM product INNER JOIN user ON product.user_id = user.user_id WHERE product.user_id <> " + user_id +
+				" ORDER BY updated_at DESC";
 		PreparedStatement pst;
 		try {
 			pst = connection.prepareStatement(showProduct);
@@ -109,7 +110,8 @@ public class ProductDao {
 	public ArrayList<Product> showMyProducts(int user_id, int index) {
 		
 		ArrayList<Product> productList = new ArrayList<Product>();
-		String getMyProducts = "SELECT * FROM product WHERE product.user_id = " + user_id + " LIMIT " + (index - 1) + ", 6";
+		String getMyProducts = "SELECT * FROM product WHERE product.user_id = " + user_id + " ORDER BY updated_at DESC" 
+				+" LIMIT " + (index - 1) + ", 6";
 		System.out.println(getMyProducts);
 		PreparedStatement pst;
 		try {
@@ -150,7 +152,8 @@ public class ProductDao {
 	public ArrayList<Product> searchProducts(String keyword) {
 		
 		ArrayList<Product> productList = new ArrayList<Product>();
-		String query = "Select * from product where product.title like '%" + keyword + "%' OR product.description like '%" + keyword + "'";
+		String query = "Select * from product where product.title like '%" + keyword + "%' OR product.description like '%" + keyword + "'" 
+				      	+ "ORDER BY updated_at DESC";
 				
 		System.out.println(query);
 		PreparedStatement pst;

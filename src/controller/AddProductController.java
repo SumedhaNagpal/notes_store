@@ -29,7 +29,12 @@ public class AddProductController extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
-		int price = Integer.parseInt(request.getParameter("price"));
+		int price = 0;
+		try {
+			price = Integer.parseInt(request.getParameter("price"));	
+		} catch(NumberFormatException e) {
+			price = 0;
+		}
 		String product_condition = request.getParameter("product_condition");
 		int product_semester = Integer.parseInt(request.getParameter("product_semester"));
 		String product_type= request.getParameter("product_type");
@@ -61,7 +66,6 @@ public class AddProductController extends HttpServlet {
 		else {
 			response.sendRedirect("sell.jsp");
 		}
-		//HttpSession session = 
 	}
 
 	}
