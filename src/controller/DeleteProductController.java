@@ -26,7 +26,7 @@ public class DeleteProductController extends HttpServlet {
 		
 		productdao.deleteProduct(product_id);
 		
-		response.sendRedirect("myProducts.jsp");
+		response.sendRedirect("myProducts");
 	}
 
 }

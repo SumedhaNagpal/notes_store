@@ -29,7 +29,12 @@ public class AddProductController extends HttpServlet {
 		
 		String title = request.getParameter("title");
 		String description = request.getParameter("description");
-		int price = Integer.parseInt(request.getParameter("price"));
+		int price = 0;
+		try {
+			price = Integer.parseInt(request.getParameter("price"));	
+		} catch(NumberFormatException e) {
+			price = 0;
+		}
 		String product_condition = request.getParameter("product_condition");
 		int product_semester = Integer.parseInt(request.getParameter("product_semester"));
 		String product_type= request.getParameter("product_type");
@@ -54,14 +59,13 @@ public class AddProductController extends HttpServlet {
 		if(productdao.addProduct(user_id, title, description, price, product_condition, product_semester, product_type,inputStream)) {			
 			PrintWriter out = response.getWriter();
 			out.print("Add product works");
-			response.sendRedirect("MyProducts");
+			response.sendRedirect("myProducts");
 
 		}
 		
 		else {
 			response.sendRedirect("sell.jsp");
 		}
-		//HttpSession session = 
 	}
 
 	}

@@ -34,7 +34,7 @@ public class EditProductController extends HttpServlet {
 		boolean check = productdao.editProduct(product_id, title, description, price, product_condition, product_semester, product_type);
 			
 		
-		response.sendRedirect("myProducts.jsp");
+		response.sendRedirect("myProducts");
 	}
 
 }
