@@ -82,4 +82,12 @@
     <servlet-name>DeleteProduct</servlet-name>
     <url-pattern>/deleteProduct</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>Payment</servlet-name>
+    <servlet-class>controller.PaymentController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Payment</servlet-name>
+    <url-pattern>/payment</url-pattern>
+  </servlet-mapping>
 </web-app>

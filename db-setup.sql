@@ -56,4 +56,13 @@ CREATE TABLE `room` (
   FOREIGN KEY (`person1`) REFERENCES user(user_id),
   FOREIGN KEY (`person2`) REFERENCES user(user_id)
 );
+CREATE TABLE `payment` (
+  `order_id` varchar(20) NOT NULL,
+ `cust_id` varchar(20) NOT NULL,
+ `industry_type_id` varchar(20) NOT NULL  ,
+  `channel` varchar(20) NOT NULL ,
+  `txnAmount` int(6) DEFAULT NULL
+);
+
+
 
