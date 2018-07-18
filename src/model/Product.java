@@ -11,8 +11,9 @@ public class Product {
 	private int product_semester;
 	private String product_type;
 	public String base64Image;
+	private Boolean isSold;
 	
-	public Product(int product_id,int user_id, String title, String description, int price, String product_condition, String user_name, int product_semester, String product_type, String base64Image){
+	public Product(int product_id,int user_id, String title, String description, int price, String product_condition, String user_name, int product_semester, String product_type, String base64Image,Boolean isSold){
 		this.product_id = product_id;
 		this.user_id = user_id;
 		this.title = title;
@@ -23,6 +24,7 @@ public class Product {
 		this.product_semester = product_semester;
 		this.product_type = product_type;
 		this.base64Image = base64Image;
+		this.isSold = isSold;
 	}
 	public int getProduct_semester() {
 		return product_semester;
@@ -37,13 +39,14 @@ public class Product {
 		this.product_type = product_type;
 	}
 	
-	public Product(int product_id,String title, String description, int price, String condition,String base64Image){
+	public Product(int product_id,String title, String description, int price, String condition,String base64Image,Boolean isSold){
 		this.product_id = product_id;
 		this.title = title;
 		this.description = description;
 		this.price = price;
 		this.product_condition = condition;
 		this.base64Image = base64Image;
+		this.isSold = isSold;
 	}
 	public int getProduct_id() {
 		return product_id;
@@ -94,10 +97,28 @@ public class Product {
     public void setBase64Image(String base64Image) {
         this.base64Image = base64Image;
     }
+    public String getSoldStatus() {
+        String status;
+    	if (isSold == true)
+        	status = "Sold";
+        else
+        	status = "Not Sold";
+    	
+    	return status;
+        		
+    }
+    public Boolean getIsSold() {
+        return isSold;
+    }
+    
+    public void setIsSold(Boolean isSold) {
+        this.isSold = isSold;
+    }
+   
 	@Override
 	public String toString() {
 		return "Product [product_id=" + product_id + ", user_id=" + user_id + ", title=" + title + ", description="
 				+ description + ", price=" + price + ", product_condition=" + product_condition + ", user_name="
-				+ user_name + ", product_semester=" + product_semester + ", product_type=" + product_type + ", pic=" + base64Image + "]";
+				+ user_name + ", product_semester=" + product_semester + ", product_type=" + product_type + ", pic=" + base64Image + ", isSold=" + isSold + "]";
 	}	
 }

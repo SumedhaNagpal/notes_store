@@ -21,7 +21,7 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navabr-dark">
         <div class="container">
-          <a class="navbar-brand" href="index.html">Site Name</a>
+          <a class="navbar-brand" href="index.html">Re-Sale</a>
           <div class="collapse navbar-collapse" id="probootstrap-nav">
            
           </div>
@@ -34,9 +34,9 @@
         <div class="row probootstrap-vh-100 align-items-center text-center">
           <div class="col-sm">
             <div class="probootstrap-text">
-              <h1 class="probootstrap-heading text-white mb-4">Site Name</h1>
+              <h1 class="probootstrap-heading text-white mb-4">ReSale</h1>
               <div class="probootstrap-subheading mb-5">
-                <p class="h4 font-weight-normal">Site Headline</p>
+                <p class="h4 font-weight-normal">A unique platform to buy and sell all your college material!</p>
               </div>
               <p><a href="login.jsp" class="btn btn-primary mr-2 mb-2">Login</a><a href="registerpage.jsp" class="btn btn-primary btn-outline-white mb-2">Signup</a></p>
             </div>

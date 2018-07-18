@@ -109,6 +109,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 								<p><%= product.getProductCondition() %></p>
 								<h4>PRICE</h4>
 								<p>₹ <%= product.getPrice() %></p>
+								<h4>Status</h4>
+								<p><%= product.getSoldStatus() %>
 							</div>
 				        </div>
 				      </div>

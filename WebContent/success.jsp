@@ -93,7 +93,17 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			      <div class="w3-container w3-white">
 			        <p><b><%= product.getTitle() %></b></p>
 			        <p><b> ₹ <%= product.getPrice() %></b></p>
-			        <div style="margin-bottom: 24px"><button type="button class" class="btn btn-info btn-lg" data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>">View Details</button></div>
+			        <div style="margin-bottom: 24px">
+			        <button type="button class" class="btn btn-info btn-lg" data-toggle="modal" data-target="#product_<%= product.getProduct_id()%>" style="margin:4px;">View Details</button>
+			       	<form method="POST" action="TxnTest.jsp">
+			       		<%
+			       			HttpSession s=request.getSession();
+			       			s.setAttribute("current_product_id",product.getProduct_id());
+			       		%>
+				      	<button type="submit" class="btn btn-success">Buy Now</button>				       
+				     </form>
+			     
+			        </div>
 
 					 <!-- Modal -->
 					 

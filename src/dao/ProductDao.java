@@ -28,8 +28,8 @@ public class ProductDao {
     }
 	
 	public boolean addProduct(int user_id, String title, String description, int price, String product_condition, int product_semester, String product_type,InputStream inputStream) {
-		String query = "INSERT INTO product(user_id, title, description, price, product_condition, product_semester, product_type, pic) "
-				+ "VALUES(?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO product(user_id, title, description, price, product_condition, product_semester, product_type, pic,isSold) "
+				+ "VALUES(?,?,?,?,?,?,?,?,?)";
 		PreparedStatement pst;
 		try {
 			pst = connection.prepareStatement(query);
@@ -44,6 +44,7 @@ public class ProductDao {
                 // fetches input stream of the upload file for the blob column
                 pst.setBlob(8, inputStream);
             }
+			pst.setBoolean(9, false);
 			
 			int num = pst.executeUpdate();
 			if(num>0) {
@@ -60,7 +61,7 @@ public class ProductDao {
 	
 	public ArrayList<Product> showAllProducts(int user_id) {
 		ArrayList<Product> productList = new ArrayList<Product>();
-		String showProduct = "SELECT * FROM product INNER JOIN user ON product.user_id = user.user_id WHERE product.user_id <> " + user_id +
+		String showProduct = "SELECT * FROM product INNER JOIN user ON product.user_id = user.user_id WHERE product.user_id <> " + user_id + " AND product.isSold = 0 " + 
 				" ORDER BY updated_at DESC";
 		PreparedStatement pst;
 		try {
@@ -77,6 +78,7 @@ public class ProductDao {
 				String first_name = result.getString("first_name");
 				String last_name = result.getString("last_name");
 				int productUser_id = result.getInt("user_id");
+				Boolean isSold = result.getBoolean("isSold");
 				String user_name = first_name + " " + last_name;
 				
 				Blob blob = result.getBlob("pic");
@@ -97,7 +99,7 @@ public class ProductDao {
                 inputStream.close();
                 outputStream.close();
                 
-				Product prod = new Product(product_id,productUser_id,title, description, price, product_condition, user_name, product_semester, product_type, base64Image);
+				Product prod = new Product(product_id,productUser_id,title, description, price, product_condition, user_name, product_semester, product_type, base64Image,isSold);
 
 				productList.add(prod);
 			}
@@ -124,6 +126,7 @@ public class ProductDao {
 				int product_id = result.getInt("product_id");
 				String condition = result.getString("product_condition");
 				Blob blob = result.getBlob("pic");
+				Boolean isSold = result.getBoolean("isSold");
 				
 				InputStream inputStream = blob.getBinaryStream();
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -141,7 +144,7 @@ public class ProductDao {
                 inputStream.close();
                 outputStream.close();
                 
-				Product prod = new Product(product_id,title, description, price, condition,base64Image);
+				Product prod = new Product(product_id,title, description, price, condition,base64Image,isSold);
 				productList.add(prod);
 			}
 		} catch(Exception e) {
@@ -149,10 +152,15 @@ public class ProductDao {
 		}
 		return productList;
 	}
-	public ArrayList<Product> searchProducts(String keyword) {
+	public ArrayList<Product> searchProducts(int user_id,String keyword) {
+		
+		if(keyword.equals(null) || keyword.equals(""))
+				return showAllProducts(user_id);
 		
 		ArrayList<Product> productList = new ArrayList<Product>();
-		String query = "Select * from product where product.title like '%" + keyword + "%' OR product.description like '%" + keyword + "'" 
+		String query = "Select * from product where product.title like '%" + keyword + "%' OR product.description like '%" + keyword + "'"
+						+ " AND product.isSold = 0 " 
+						+ "AND product.user_id <> " + user_id
 				      	+ "ORDER BY updated_at DESC";
 				
 		System.out.println(query);
@@ -167,6 +175,7 @@ public class ProductDao {
 				int product_id = result.getInt("product_id");
 				String condition = result.getString("product_condition");
 				Blob blob = result.getBlob("pic");
+				Boolean isSold = result.getBoolean("isSold");
 				
 				InputStream inputStream = blob.getBinaryStream();
                 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -184,7 +193,7 @@ public class ProductDao {
                 inputStream.close();
                 outputStream.close();
                 
-				Product prod = new Product(product_id,title, description, price, condition,base64Image);
+				Product prod = new Product(product_id,title, description, price, condition,base64Image,isSold);
 				productList.add(prod);
 			}
 		} catch(Exception e) {
@@ -226,6 +235,28 @@ public class ProductDao {
 			pst.setString(6, product_type);
 			pst.setInt(7, product_id);
 			
+			int rs = pst.executeUpdate();
+			if(rs>0)
+				return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+		
+	}
+	
+	public boolean updateProductStatus(int product_id) {
+		String updateQuery = "UPDATE product "
+				+ "SET isSold = 1"	
+				+ " WHERE product_id=?";
+		
+		PreparedStatement pst;
+		try {
+			pst = connection.prepareStatement(updateQuery);
+			pst.setInt(1, product_id);
+	
 			int rs = pst.executeUpdate();
 			if(rs>0)
 				return true;

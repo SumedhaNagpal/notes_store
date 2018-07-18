@@ -34,12 +34,13 @@ public class SearchController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session = request.getSession();
+		int user_id = (int) session.getAttribute("user_id");
 		
 		String keyword = request.getParameter("search");
 	  	
 		ProductDao productdao = new ProductDao();
 		ArrayList<Product> productList = new ArrayList<Product>();
-		productList = productdao.searchProducts(keyword);
+		productList = productdao.searchProducts(user_id,keyword);
 		session.setAttribute("product list", productList);
 //		request.setAttribute("product list", productList);
 //		request.getRequestDispatcher(page).forward(request, response);
