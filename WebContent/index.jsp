@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
   <head>
-    <title>Site Name</title>
+    <title>Notes Store</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Site For Buying and Selling Books" />
@@ -117,14 +117,14 @@
 
 
 
-    <footer class="probootstrap-footer">
+<!--     <footer class="probootstrap-footer">
       <div class="container">
 
           <div class="col-md text-md-right text-left">
             <p><small>&copy; Unlock 2017. All Rights Reserved. <br> Made with <span class="icon-heart"></span> by <a href="https://uicookies.com/">uiCookies</a> Demo Images: Unsplash</small></p>
           </div>
         </div>
-    </footer>
+    </footer> -->
 
 
     <script src="js/jquery-3.2.1.slim.min.js"></script>

@@ -1,11 +1,19 @@
-
+<%@ page import="model.User" %>
 <!-- Sidebar/menu -->
 <nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
   <div class="w3-container">
     <a href="#" onclick="w3_close()" class="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey" title="close menu">
       <i class="fa fa-remove"></i>
     </a>
-    <img src="data:image/png;base64,${user.base64Image}" style="width:45%;" class="w3-round"><br><br>
+    <!-- <img src="data:image/png;base64,${user.base64Image}" style="width:45%;" class="w3-round"><br><br> -->
+    <%
+    	User user = (User)session.getAttribute("user");
+		if(!user.getBase64Image().isEmpty()){		  	
+	%>
+	        <img src="data:image/png;base64,<%= user.getBase64Image() %>" style="width:45%" class="w3-round"><br><br>
+    <%}else{%>
+		    <img alt="no image" src="images/no-image.png" style="width:45%" class="w3-round"><br><br>
+     <%} %>
     
   <p class="w3-text-grey">Hello, <%= session.getAttribute( "first_name" ) %></p>
   </div>

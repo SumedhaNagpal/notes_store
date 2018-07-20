@@ -3,12 +3,13 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.io.*, java.util.*, javax.servlet.*"  %>
 <%@ page import="model.Product" %>
+<%@ page import="model.User" %>
 <%@ page import="java.util.Date, java.text.DateFormat, java.text.SimpleDateFormat" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Buy Notes and Books</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
@@ -88,7 +89,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			     <%}
 			    	else{
 			      %>
-			    <img alt="no image" src="http://via.placeholder.com/350x150" style="width:100%" class="w3-hover-opacity">
+			    <img alt="no image" src="images/no-image.png" style="width:100%" class="w3-hover-opacity">
 			      <%} %>
 			      <div class="w3-container w3-white">
 			        <p><b><%= product.getTitle() %></b></p>
@@ -99,6 +100,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Raleway", sans-serif}
 			       		<%
 			       			HttpSession s=request.getSession();
 			       			s.setAttribute("current_product_id",product.getProduct_id());
+			       			s.setAttribute("product_price", product.getPrice());
 			       		%>
 				      	<button type="submit" class="btn btn-success">Buy Now</button>				       
 				     </form>

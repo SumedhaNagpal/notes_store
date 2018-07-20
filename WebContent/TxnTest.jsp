@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
- <%@page import="java.util.*" %>  
+ <%@page import="java.util.*, javax.servlet.http.HttpSession" %>  
  <%
  	Random randomGenerator = new Random();
 	int randomInt = randomGenerator.nextInt(1000000);
@@ -13,6 +13,9 @@
 <meta name="GENERATOR" content="Evrsoft First Page">
 </head>
 <body>
+	<%
+		HttpSession s=request.getSession();
+	%>
 	<h1>Merchant Check Out Page</h1>
 	<pre>
 	</pre>
@@ -54,7 +57,7 @@
 					<td><label>txnAmount*</label></td>
 					<td><input title="TXN_AMOUNT" tabindex="10"
 						type="text" name="TXN_AMOUNT"
-						value="1">
+						value="<%= s.getAttribute("product_price") %>">
 					</td>
 				</tr>
 				<tr>

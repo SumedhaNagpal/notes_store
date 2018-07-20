@@ -2,11 +2,12 @@ CREATE DATABASE IF NOT EXISTS NotesStore;
 
 USE NotesStore;
 
-
+DROP TABLE IF EXISTS payment;
 DROP TABLE IF EXISTS message;
 DROP TABLE IF EXISTS room;
-DROP TABLE IF EXISTS user;
 DROP TABLE IF EXISTS product;
+DROP TABLE IF EXISTS user;
+
 
 CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,  
@@ -52,7 +53,7 @@ CREATE TABLE `message` (
   FOREIGN KEY (`from_id`) REFERENCES user(user_id)
 );
 
-CREATE TABLE `room` (paymentpayment
+CREATE TABLE `room` (
   `room_id` varchar(64) NOT NULL,
   `person1` int(11) NOT NULL,
   `person2` int(11) NOT NULL,
@@ -67,3 +68,4 @@ CREATE TABLE `payment` (
  `industry_type_id` varchar(20) NOT NULL  ,
   `channel` varchar(20) NOT NULL ,
   `txnAmount` int(6) DEFAULT NULL
+);

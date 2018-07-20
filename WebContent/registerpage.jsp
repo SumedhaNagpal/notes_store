@@ -68,15 +68,6 @@
   
   
  </div> 
-
-       
-       <footer class="probootstrap-footer">
-      <div class="container">
-          <div class="col-md text-md-right text-left">
-            <p><small>&copy; Unlock 2017. All Rights Reserved. <br> Made with <span class="icon-heart"></span> by <a href="https://uicookies.com/">uiCookies</a> Demo Images: Unsplash</small></p>
-          </div>
-        </div>
-    </footer>
         
       <script src="js/jquery-3.2.1.slim.min.js"></script>
     <script src="js/popper.min.js"></script>

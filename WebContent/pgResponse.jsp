@@ -40,6 +40,7 @@ try{
 <title>Insert title here</title>
 </head>
 <body>
-<%= outputHTML %>
+<%= outputHTML %><br>
+<a href="success.jsp"> Go to home </a>
 </body>
 </html>
